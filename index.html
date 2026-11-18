@@ -1,1 +1,672 @@
+<!DOCTYPE html>
+<html lang="fr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cinégram</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0b0b0f;--p:#121217;--p2:#18181e;--l:#292930;--m:#91919d;--t:#f5f3f5;--a:#e8326a;--a2:#ff6a8d;--pmr:#3b8bbe;--f:"Space Grotesk",sans-serif;box-sizing:border-box;padding-top:env(safe-area-inset-top,0);padding-bottom:env(safe-area-inset-bottom,0)}
+*{box-sizing:border-box;margin:0;padding:0;scrollbar-width:none}
+*::-webkit-scrollbar{display:none}
+html{scroll-padding-top:env(safe-area-inset-top,0)}
+body{background:var(--bg);color:var(--t);font-family:Inter,sans-serif;font-size:14px;min-width:320px}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;text-align:left}
+input{font:inherit;color:inherit}
+h1,h2,h3,h4,.f{font-family:var(--f)}
+small{color:var(--m)}
+.side{position:fixed;inset:0 auto 0 0;width:220px;border-right:1px solid var(--l);padding:28px 16px 18px;display:flex;flex-direction:column;background:#0b0b0fF2;z-index:30}
+.brand{display:flex;align-items:center;gap:10px;font:700 17px var(--f);letter-spacing:.08em;padding:0 8px}
+.bm{width:30px;height:30px;border-radius:10px;background:linear-gradient(135deg,#ff275f,#a321df);display:grid;place-items:center;font-size:12px}
+.nav{display:grid;gap:6px;margin-top:40px}
+.ni{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:12px;color:#a7a6af;font-weight:600;transition:.2s}
+.ni:hover{background:#16161c;color:#fff;transform:translateX(4px)}
+.ni.on{background:#e8326a1c;color:#ff547d}
+.cnt{margin-left:auto;background:var(--a);color:#fff;border-radius:50%;width:20px;height:20px;display:grid;place-items:center;font-size:11px}
+.prem{margin-top:auto;border:1px solid #343039;border-radius:16px;background:linear-gradient(145deg,#21151c,#17141b);padding:16px}
+.prem p{color:#ff6d8f;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.prem strong{display:block;margin-top:8px;font:600 15px var(--f)}
+.prem small{font-size:11px}
+.prem button{width:100%;margin-top:12px;background:var(--a);border-radius:9px;padding:9px;text-align:center;font-weight:700;font-size:12px}
+main{margin-left:220px;min-height:100vh}
+.top{position:sticky;top:0;z-index:20;height:70px;display:flex;align-items:center;justify-content:space-between;padding:0 36px;border-bottom:1px solid var(--l);background:#0b0b0fE0;backdrop-filter:blur(14px)}
+.sb{display:flex;align-items:center;gap:10px;width:min(500px,55vw);background:#15151a;border:1px solid var(--l);border-radius:12px;padding:11px 14px;color:#777780;font-size:13px}
+.ib{width:38px;height:38px;border-radius:50%;display:inline-grid;place-items:center;font-size:17px}
+.ib:hover{background:var(--p2)}
+.wrap{width:min(1120px,calc(100% - 56px));margin:0 auto;padding:30px 0 80px;animation:in .4s both}
+@keyframes in{from{opacity:0;transform:translateY(12px)}}
+.eb{color:var(--a);font-size:10px;font-weight:700;letter-spacing:.17em;margin-bottom:6px}
+h1{font-size:27px;font-weight:700}
+.hd{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:22px;gap:10px}
+.hd span{color:var(--m);font-size:12px;display:block;margin-top:4px}
+.pill{border:1px solid #36363f;border-radius:10px;background:var(--p);padding:9px 13px;font-size:12px;font-weight:600;white-space:nowrap}
+.stories{display:flex;gap:18px;overflow-x:auto;margin:18px 0 6px;padding-bottom:8px}
+.story{display:grid;justify-items:center;gap:6px;font-size:11px;color:#aaa9b2;flex:0 0 66px}
+.ring{width:62px;height:62px;border-radius:50%;padding:3px;background:conic-gradient(var(--a),#ad42e9,#ff9d50,var(--a))}
+.ring i,.av{display:grid;place-items:center;border-radius:50%;font-style:normal;font-weight:700;font-family:var(--f);background:#222}
+.ring i{width:100%;height:100%;border:3px solid var(--bg);font-size:13px}
+.av{width:36px;height:36px;font-size:12px}
+.lay{display:grid;grid-template-columns:minmax(0,660px) 300px;gap:30px;justify-content:center;margin-top:20px}
+.feed{display:grid;gap:22px}
+.card{border:1px solid var(--l);border-radius:17px;background:var(--p);overflow:hidden}
+.ph{display:flex;align-items:center;justify-content:space-between;padding:14px 18px}
+.ph>span{display:flex;gap:10px;align-items:center}
+.ph strong{font-size:13px;display:block}.ph small{font-size:10px}
+.vis{position:relative;display:block;width:100%;height:420px;overflow:hidden}
+.vis .sh{position:absolute;inset:0;background:linear-gradient(to top,#08070ae0,transparent 55%)}
+.vis .pc{position:absolute;left:30px;bottom:30px;right:30px}
+.pc small{font-size:9px;letter-spacing:.2em;font-weight:700;color:#ffffffb0}
+.pc strong{display:block;font:700 clamp(30px,5vw,50px)/.98 var(--f);letter-spacing:-.04em;margin:6px 0}
+.pc em{font-family:Georgia,serif;color:#ffffffd0}
+.badge{position:absolute;top:16px;right:16px;background:#0a0a0d99;border-radius:7px;padding:6px 9px;color:#ffcc59;font-size:12px;font-weight:700}
+.bl{position:absolute;top:16px;left:16px;background:#e8326ae6;border-radius:7px;padding:6px 9px;font-size:9px;font-weight:700;letter-spacing:.12em}
+.act{display:flex;justify-content:space-between;padding:14px 18px 6px;font-size:22px}
+.act button{margin-right:14px;transition:.15s}.act button:hover{transform:scale(1.12)}
+.act .lk{color:var(--a)}.act .sv{color:#ffca5b}
+.body{padding:0 18px 14px;font-size:13px;line-height:1.55;color:#d4d2d7}
+.body strong{display:block;color:#fff;font-size:12px;margin-bottom:5px}
+.tags{color:#809ec2;font-size:11px;margin-top:6px}
+.show{display:grid;grid-template-columns:auto 1fr auto;gap:13px;align-items:center;padding:13px 17px;background:#15151a;border-top:1px solid var(--l)}
+.sd{width:42px;height:48px;border:1px solid #36363e;border-radius:9px;display:grid;place-items:center;align-content:center;font-size:9px;font-weight:700}
+.sd b{color:var(--a2);font-size:13px}
+.show small{font-size:8px;font-weight:700;letter-spacing:.1em;color:var(--a2);display:block}
+.show strong{font-size:13px}
+.btn{background:var(--a);border-radius:10px;padding:11px 16px;font-weight:700;font-size:13px;text-align:center;transition:.15s}
+.btn:hover{background:#ff4676}.btn:disabled{opacity:.4}
+.btn.w{width:100%;margin-top:22px}
+.side2{position:sticky;top:90px;align-self:start}
+.side2 h2{font-size:14px;margin:0 0 12px}
+.cc{border:1px solid var(--l);border-radius:14px;background:var(--p);padding:14px;margin-bottom:24px}
+.cc strong{display:block}.cc small{font-size:11px}
+.mt{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
+.mt button,.tm{border:1px solid #404049;border-radius:7px;padding:6px 10px;font-size:11px;font-weight:700;transition:.15s}
+.mt button:hover,.tm:hover{border-color:var(--a);color:var(--a2);background:#e8326a1f}
+.tr{display:grid;grid-template-columns:22px 44px 1fr;gap:9px;align-items:center;padding:9px 0;border-bottom:1px solid #202027;width:100%}
+.tr i{width:44px;height:52px;border-radius:7px}.tr b{color:#565661;font-family:var(--f)}.tr strong{font-size:12px;display:block}.tr small{font-size:10px}
+.row{display:flex;align-items:center;gap:10px;margin-top:12px}.row>span{flex:1}.row strong{font-size:12px;display:block}.row small{font-size:10px}
+.fl{color:var(--a2);font-size:12px;font-weight:700}.fl.on{color:var(--m)}
+.cats{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:22px}
+.cats button{border:1px solid #33333b;border-radius:99px;padding:10px 20px;color:#a5a3ad;font-size:13px;font-weight:600;white-space:nowrap;transition:.2s}
+.cats .on,.cats button:hover{border-color:#e8326a80;background:#e8326a1f;color:#ff7796}
+.feat{position:relative;display:block;width:100%;height:260px;border-radius:18px;overflow:hidden;background:linear-gradient(120deg,#ff4f79,#3a0f2a)}
+.feat div{position:absolute;left:32px;top:50%;transform:translateY(-50%);max-width:440px}
+.feat small{color:#fff;font-size:10px;font-weight:700;letter-spacing:.13em}
+.feat strong{display:block;font:700 clamp(22px,4vw,34px)/1.1 var(--f);margin:8px 0}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:150px;grid-auto-flow:dense;gap:4px;margin-top:14px}
+.grid button{position:relative;border-radius:4px;overflow:hidden;display:flex;align-items:flex-end;padding:10px;font-size:11px;font-weight:700;transition:.3s}
+.grid button:hover{filter:brightness(1.2);transform:scale(.99)}
+.grid .tall{grid-row:span 2}.grid .wide{grid-column:span 2}
+.cg{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.cg .card:first-child{grid-row:span 2}
+.cv{position:relative;height:170px;padding:18px;display:flex;flex-direction:column;justify-content:flex-end;background-size:cover}
+.cv small{color:#ff7897;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.08em}
+.cv h2{font-size:20px}.cv p{font-size:11px;color:#b7b5bc}
+.dist{position:absolute;top:14px;right:14px;background:#08080b99;border-radius:99px;padding:6px 10px;font-size:10px;font-weight:700}
+.mine{position:absolute;top:14px;left:14px;background:var(--a);border-radius:6px;padding:5px 8px;font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.08em}
+.prog{padding:14px 18px 18px}
+.vm{display:grid;grid-template-columns:52px 1fr;gap:12px;padding:12px 0;border-bottom:1px solid var(--l)}
+.vm i{width:52px;height:68px;border-radius:8px}.vm strong{font-size:13px}.vm small{display:block;font-size:11px;margin-top:2px}
+.soon{display:flex;align-items:center;gap:9px;margin-top:14px;border-radius:10px;background:#e8326a12;padding:10px 12px;color:#ff7897;font-size:11px}
+.soon strong{color:#c9c7cd;font-weight:600;display:block;font-size:11px}
+.rt{display:grid;grid-template-columns:170px 1fr 170px;min-height:230px;border:1px solid #303038;border-radius:18px;background:var(--p);overflow:hidden;margin-bottom:16px}
+.rt>i{display:block}.ri{padding:24px}.ri p{color:var(--a2);font-size:10px;font-weight:700;text-transform:uppercase}
+.ri h2{font-size:22px;margin:4px 0 18px}
+.dt{display:grid;grid-template-columns:1.4fr .8fr .8fr;gap:12px}.dt small{font-size:10px;display:block}.dt strong{font-size:13px}
+.ex{margin-top:14px;color:#ffb15f;font-size:11px}
+.stub{border-left:1px dashed #3b3b43;display:grid;place-items:center;align-content:center;padding:18px;text-align:center;gap:8px}
+.qr{width:92px;height:92px;border-radius:9px;background:#fff;display:grid;grid-template-columns:repeat(9,1fr);padding:7px;gap:1px}
+.qr s{background:#111}.qr s.o{background:#fff}
+.stub small{font-size:10px}.stub button{border:1px solid #3b3a43;border-radius:7px;padding:6px 9px;font-size:10px}
+.empty{text-align:center;border:1px solid var(--l);border-radius:17px;background:var(--p);padding:60px 20px}
+.empty h2{margin:12px 0 6px}
+.prof{border:1px solid var(--l);border-radius:20px;background:var(--p);overflow:hidden}
+.pcv{height:190px;background:linear-gradient(120deg,#e8326a,#3a1050,#0b0b0f)}
+.pm{padding:0 32px 30px}
+.pid{display:flex;align-items:flex-end;gap:16px;margin-top:-45px;flex-wrap:wrap}
+.pid .av{width:104px;height:104px;font-size:32px;border:5px solid var(--p);background:linear-gradient(135deg,#ff275f,#a321df)}
+.pid>div{flex:1}.pid h1{font-size:24px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);max-width:580px;margin-top:20px;border:1px solid #2f2f37;border-radius:13px;background:#15151a}
+.stats button{text-align:center;padding:13px 6px;border-right:1px solid #2f2f37}.stats button:last-child{border:0}
+.stats button.on,.stats button:hover{background:#e8326a17;color:#ff7897}
+.stats strong{display:block;font:700 16px var(--f)}.stats small{font-size:10px}
+.ins{margin-top:16px;border:1px solid #33333c;border-radius:14px;background:#15151a;overflow:hidden}
+.ins>div{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid #2d2d34}
+.ins .it{display:flex;gap:12px;padding:12px 16px;border-bottom:1px solid #292930;align-items:center}
+.ins .it i{width:50px;height:60px;border-radius:7px;flex:none}.ins .it span{flex:1}.ins .it strong{font-size:13px;display:block}.ins .it small{font-size:11px}
+.tabs{display:grid;grid-template-columns:repeat(3,1fr);margin:24px -32px 0;border-top:1px solid var(--l)}
+.tabs button{text-align:center;padding:14px;color:var(--m);font-size:12px;font-weight:700}
+.tabs .on{color:#fff;box-shadow:inset 0 2px var(--a)}
+.pg{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin:0 -32px -30px}
+.pg button{aspect-ratio:1;display:grid;place-items:center;font-weight:700;font-size:13px}
+.pg button:hover{filter:brightness(1.25)}
+.mn{display:none}
+.bd{position:fixed;inset:0;z-index:100;display:grid;place-items:center;overflow-y:auto;background:#050507d1;padding:24px;backdrop-filter:blur(8px)}
+.md{position:relative;width:min(700px,100%);max-height:calc(100vh - 48px);overflow-y:auto;border:1px solid #35343c;border-radius:22px;background:#111116;animation:in .25s both}
+.x{position:absolute;top:14px;right:14px;z-index:3;width:38px;height:38px;border-radius:50%;background:#0a0a0da0;display:grid;place-items:center;font-size:18px;text-align:center}
+.dh{position:relative;height:300px;display:flex;flex-direction:column;justify-content:flex-end;padding:30px}
+.dh::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,#111116 2%,transparent 75%)}
+.dh>*{position:relative;z-index:1}.dh p{color:#ff7897;font-size:11px;font-weight:700;text-transform:uppercase}
+.dh h2{font-size:34px;font-weight:700;margin:3px 0}.dh em{font-family:Georgia,serif;color:#d2d0d4}
+.meta{display:flex;gap:8px;margin-top:12px}.meta span{border:1px solid #ffffff2e;border-radius:5px;padding:4px 8px;font-size:11px}
+.dc{padding:6px 32px 30px}.dc>p{color:#aaa8b0;line-height:1.65}
+.cast{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:14px}
+.cast .av{width:100%;height:auto;aspect-ratio:1;border-radius:10px;font-size:22px}
+.cast strong{display:block;margin-top:6px;font-size:12px}.cast small{font-size:11px}
+.bh{display:grid;grid-template-columns:40px 1fr 40px;align-items:center;padding:16px 22px;border-bottom:1px solid var(--l);text-align:center}
+.bh .b{width:36px;height:36px;border-radius:50%;background:var(--p2);display:grid;place-items:center}
+.bh p{color:var(--a2);font-size:9px;font-weight:700;letter-spacing:.12em}.bh h2{font-size:16px}
+.stp{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;padding:12px 22px 0}.stp i{height:3px;border-radius:3px;background:#303037}.stp i.on{background:var(--a)}
+.bc{padding:26px 32px 30px}.bc h3{font-size:20px}.bc .sub{color:var(--m);font-size:12px;margin-top:4px}
+.dp,.tp{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-top:20px}
+.dp button,.tp button{border:1px solid #34343c;border-radius:11px;padding:11px 6px;text-align:center}
+.dp strong{display:block;font-size:20px}.dp small,.tp small{font-size:10px}.tp strong{font-size:14px;display:block}
+.dp .on,.tp .on{border-color:var(--a);background:#e8326a1a}
+.scr{height:6px;margin:18px 40px 22px;border-radius:50% 50% 0 0;border-top:3px solid #716777;box-shadow:0 8px 14px #e8326a33}
+.sm{display:grid;gap:6px}.sr{display:grid;grid-template-columns:14px repeat(12,1fr) 14px;gap:4px;align-items:center}
+.sr>span{font-size:10px;color:#66656e;text-align:center}
+.sr button{aspect-ratio:1.1;border-radius:5px 5px 7px 7px;background:#393940;display:grid;place-items:center;font-size:9px;transition:.12s}
+.sr button:hover:not(:disabled){background:#5d4a54}
+.sr .on{background:var(--a)!important}.sr .pm2{border:1px solid #4f93bd;background:#3b8bbe24;color:#70bce9}
+.sr .pm2.on{background:#2888bf!important;color:#fff;border-color:#7ed2ff}
+.sr button:disabled{opacity:.18;cursor:not-allowed}
+.lg{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin-top:16px;font-size:11px;color:var(--m)}
+.lg i{display:inline-block;width:10px;height:10px;border-radius:3px;background:#393940;margin-right:5px;vertical-align:-1px}
+.sumb{display:flex;align-items:center;gap:16px;margin:22px -32px -30px;padding:15px 32px;background:#15151a;border-top:1px solid var(--l)}
+.sumb>span{flex:1}.sumb strong{font-size:18px;display:block}.sumb small{font-size:11px}
+.tg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:20px}
+.tg article{display:grid;grid-template-columns:52px 1fr;gap:12px;align-items:center;border:1px solid #34343c;border-radius:12px;background:#15151a;padding:12px}
+.tg article.on{border-color:#e8326aa6;background:#e8326a12}
+.tg .ti{width:52px;height:52px;border-radius:11px;background:#2c2228;display:grid;place-items:center;font-size:26px;grid-row:span 2}
+.tg strong{font-size:13px;display:block}.tg small{font-size:10px}.tg b{color:#ffb15f;font-size:12px;display:block;margin-top:3px}
+.qp{grid-column:1/-1;display:flex;justify-content:flex-end;align-items:center;gap:10px}
+.qp button{width:28px;height:28px;border:1px solid #42414a;border-radius:50%;text-align:center}
+.qp button:disabled{opacity:.25}
+.note{margin-top:14px;background:#ffb15f12;border-radius:10px;padding:10px 12px;color:#ffb15f;font-size:12px}
+.ts{display:grid;grid-template-columns:90px 1fr;gap:16px;margin-top:18px;border:1px solid var(--l);border-radius:13px;background:var(--p2);padding:12px}
+.ts i{height:115px;border-radius:9px}.ts p{color:#aaa8b0;font-size:12px;margin-top:6px}.ts h4{font-size:16px;margin:3px 0 8px}
+.pl{display:grid;gap:9px;margin-top:18px}.pl span{display:flex;justify-content:space-between;color:#aaa8b0}
+.pl .tot{border-top:1px solid var(--l);padding-top:11px;color:#fff;font-size:15px;font-weight:700}
+.cf{margin-top:18px;display:grid;grid-template-columns:1fr 76px 64px;border:1px solid #383840;border-radius:10px;overflow:hidden}
+.cf input{background:#17171c;border:0;border-right:1px solid #383840;padding:11px;font-size:12px;outline:0;min-width:0}
+.ok{text-align:center;padding:50px 34px 40px;display:grid;justify-items:center}
+.ok .ck{width:70px;height:70px;border-radius:50%;background:#44be741f;color:#55d58a;display:grid;place-items:center;font-size:32px;box-shadow:0 0 0 10px #44be740d}
+.ok .tk{margin-top:22px;border:1px dashed #4a4a52;border-radius:13px;background:var(--p2);padding:16px 30px}
+.tk strong{color:var(--a2);font-size:20px;display:block}
+.so{position:fixed;inset:0;z-index:150;background:#08080bf0;padding:12vh 24px;backdrop-filter:blur(16px)}
+.so>*{width:min(640px,100%);margin:0 auto;display:block}
+.sd2{display:flex;align-items:center;gap:12px;border-bottom:1px solid #55545d;padding:10px 4px}
+.sd2 input{flex:1;background:none;border:0;outline:0;font-size:19px}
+#sres{margin-top:24px}#sres p{color:var(--m);font-size:10px;font-weight:700;letter-spacing:.15em}
+#sres button{display:grid;grid-template-columns:46px 1fr;gap:13px;align-items:center;width:100%;padding:11px 0;border-bottom:1px solid #24242b}
+#sres i{width:46px;height:46px;border-radius:8px}#sres strong{display:block;font-size:14px}#sres small{font-size:11px}
+.cmt{display:flex;gap:14px;padding:17px 26px;border-bottom:1px solid var(--l)}.cmt .av{width:46px;height:46px;flex:none;font-size:14px}
+.cmt>span{flex:1;font-size:15px;line-height:1.55}.cmt b{margin-right:6px}.cmt small{display:block;font-size:11px;margin-top:3px}
+.cmt button{font-size:16px;text-align:center;min-width:32px;color:var(--m)}.cmt button.lk{color:var(--a)}.cmt button small{margin:0}
+.cmi{display:flex;gap:12px;align-items:center;padding:16px 24px;border-top:1px solid var(--l)}
+.cmi input{flex:1;min-width:0;background:#17171c;border:1px solid #383840;border-radius:99px;padding:13px 18px;font-size:14px;outline:0}
+.cmi .btn{padding:10px 15px}
+[data-a]{cursor:pointer}
+.ms{display:grid;grid-template-columns:300px 1fr;height:min(620px,72vh);border:1px solid var(--l);border-radius:18px;background:var(--p);overflow:hidden}
+.ml{overflow-y:auto;border-right:1px solid var(--l)}
+.ml button{display:flex;gap:11px;align-items:center;width:100%;padding:13px 16px;border-bottom:1px solid #202027}
+.ml button.on,.ml button:hover{background:#e8326a14}
+.ml span{min-width:0;flex:1}.ml strong{display:block;font-size:13px}.ml small{display:block;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mc{display:flex;flex-direction:column;min-width:0}
+.mh{display:flex;gap:11px;align-items:center;padding:13px 18px;border-bottom:1px solid var(--l)}.mh strong{display:block;font-size:14px}.mh small{font-size:11px}.mh .back{display:none;font-size:24px;padding:0 6px}
+.mb{flex:1;overflow-y:auto;padding:16px 18px;display:flex;flex-direction:column;gap:8px}
+.bub{max-width:75%;align-self:flex-start;background:#22222a;border-radius:16px 16px 16px 4px;padding:9px 13px;font-size:13px;line-height:1.45}
+.bub.me{align-self:flex-end;background:var(--a);border-radius:16px 16px 4px 16px}
+.bub small{display:block;font-size:9px;opacity:.65;margin-top:3px;color:inherit}
+.pcv{position:relative}.gear{position:absolute;top:16px;right:16px;width:42px;height:42px;font-size:20px;background:#08080b80;backdrop-filter:blur(8px);border:1px solid #ffffff30}
+.gear:hover{transform:rotate(60deg);transition:.4s}
+.avs{display:flex;gap:9px;flex-wrap:wrap;padding:0 26px}.avs button{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-size:20px;border:2px solid transparent;text-align:center;transition:.15s}.avs button.on{border-color:#fff;transform:scale(1.08)}
+.ef{display:grid;gap:14px;padding:18px 26px 6px}.ef label{display:grid;gap:6px;font-size:12px;font-weight:700}
+.ef input,.ef textarea{background:#17171c;border:1px solid #383840;border-radius:10px;padding:12px 14px;font:inherit;font-weight:400;font-size:14px;outline:0;color:var(--t)}
+.ef textarea{resize:none;height:88px}.ef input:focus,.ef textarea:focus{border-color:var(--a)}
+.sh2{padding:18px 26px 6px;color:var(--a2);font-size:10px;font-weight:700;letter-spacing:.14em}
+.sg{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;padding:14px 26px;border-bottom:1px solid var(--l)}
+.sg strong{display:block;font-size:14px}.sg small{font-size:12px}
+.tgl{width:46px;height:27px;border-radius:99px;background:#3a3a43;position:relative;flex:none;transition:.2s}
+.tgl::after{content:"";position:absolute;top:3px;left:3px;width:21px;height:21px;border-radius:50%;background:#fff;transition:.2s}
+.tgl.on{background:var(--a)}.tgl.on::after{transform:translateX(19px)}
+.seg{display:flex;border:1px solid #383840;border-radius:99px;overflow:hidden}.seg button{padding:8px 13px;font-size:12px;font-weight:700;text-align:center;color:var(--m)}.seg .on{background:var(--a);color:#fff}
+.pcv::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,var(--p),transparent 65%);pointer-events:none}.gear{z-index:1}
+.cvp{height:92px;border-radius:12px;background:linear-gradient(120deg,#e8326a,#3a1050,#0b0b0f)}
+.ths{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}.ths button{width:52px;height:52px;border-radius:10px;border:2px solid transparent;transition:.15s}.ths button:hover{transform:scale(1.06)}.ths .on{border-color:#fff}
+.pcv{height:230px;z-index:0}
+.pcv::after{background:linear-gradient(to top,var(--p) 0%,#121217cc 22%,#12121700 72%)}
+.pm{position:relative;z-index:1}
+.pid{position:relative;z-index:2;margin-top:-78px}
+.pid .av{position:relative;z-index:3;box-shadow:0 8px 24px #0009}
+.geo{display:flex;gap:10px;flex-wrap:wrap}.gm{position:relative}
+.gmenu{position:absolute;right:0;top:calc(100% + 8px);z-index:40;min-width:200px;background:#17171c;border:1px solid #35343c;border-radius:14px;padding:6px;box-shadow:0 20px 50px #000a;animation:in .2s}
+.gmenu button{display:block;width:100%;padding:11px 14px;border-radius:9px;font-size:13px;font-weight:600}
+.gmenu button:hover,.gmenu .on{background:#e8326a1a;color:var(--a2)}
+.ni>span:first-child{display:grid;place-items:center;width:22px}.ni.on svg,.mn .on svg{stroke-width:2.5}
+.ni svg,.mn svg{stroke-width:2.2}.ni.on svg,.mn .on svg{stroke-width:2.6}
+.top>div:last-child{display:flex;align-items:center;gap:4px}
+.sbw{position:relative;width:min(500px,55vw)}.sbw .sb{width:100%;margin:0}.sb svg{width:18px;height:18px;flex:none}
+.sb input{flex:1;min-width:0;background:none;border:0;outline:0;font-size:13px;color:var(--t)}.sb input::placeholder{color:#777780}.sb:focus-within{border-color:var(--a);background:#18181e}
+.tres{position:absolute;left:0;right:0;top:calc(100% + 8px);z-index:45;max-height:70vh;overflow-y:auto;background:#17171c;border:1px solid #35343c;border-radius:14px;padding:8px;box-shadow:0 24px 60px #000b}.tres:empty{display:none}
+.tres p{padding:8px 10px 4px;color:var(--m);font-size:10px;font-weight:700;letter-spacing:.14em}
+.tres button{display:grid;grid-template-columns:40px 1fr;gap:12px;align-items:center;width:100%;padding:8px 10px;border-radius:9px}.tres button:hover{background:#e8326a14}
+.tres button i{width:40px;height:40px;font-style:normal;display:grid;place-items:center;font-size:14px}.tres button i:not(.av){border-radius:8px}
+.tres strong{display:block;font-size:13px}.tres small{font-size:11px}
+.bdg{position:absolute;top:1px;right:1px;min-width:17px;height:17px;padding:0 4px;border-radius:9px;background:var(--a);border:2px solid var(--bg);font-size:10px;font-weight:700;display:grid;place-items:center;pointer-events:none}
+.gmenu.nt{width:min(380px,calc(100vw - 24px));padding:0;overflow:hidden}.nh{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;border-bottom:1px solid var(--l)}.nh button{width:auto;padding:4px 8px;font-size:12px;color:var(--a2)}
+.gmenu .lst{max-height:60vh;overflow-y:auto}
+.gmenu .ni2{display:flex;gap:12px;align-items:flex-start;border-radius:0;padding:13px 16px;font-weight:500;line-height:1.45;border-bottom:1px solid #202027}
+.ni2 .ico{font-size:18px;flex:none}.ni2 small{display:block;margin-top:2px;font-size:11px}.ni2.un{background:#e8326a10}.ni2.un::after{content:"";width:8px;height:8px;border-radius:50%;background:var(--a);margin-left:auto;margin-top:6px;flex:none}
+.ne{padding:26px;text-align:center;color:var(--m);font-size:13px}
+.gmenu svg{width:18px;height:18px;flex:none}
+.acct{min-width:270px}.ah{display:flex;gap:12px;align-items:center;padding:12px 14px;border-bottom:1px solid var(--l);margin-bottom:6px}.ah strong{display:block;font-size:14px}.ah small{font-size:12px}
+.acct>button,.gmenu .pr{display:flex;gap:10px;align-items:center}.gmenu .dg{color:#ff6d8f}
+.foot{display:flex;align-items:center;gap:6px;margin-top:16px}.foot .row{min-width:0}.foot .row strong,.foot .row small{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.foot .row>span{min-width:0}
+.snd.off{color:var(--m)}.snd svg{width:20px;height:20px}
+.lg2{min-height:100vh;display:grid;align-content:center;justify-items:center;text-align:center;padding:40px 20px}.lg2 h1{font-size:34px}.lg2 p{color:var(--m);margin-top:6px}
+.lps{display:flex;gap:24px;flex-wrap:wrap;justify-content:center;margin-top:36px}.lp{display:grid;justify-items:center;gap:6px;width:130px;text-align:center;transition:.2s}.lp:hover{transform:translateY(-4px)}
+.lp .av{border:3px solid transparent}.lp:hover .av{border-color:#fff}.lp strong{margin-top:6px;font-size:14px}.lp small{font-size:12px}
+.sr .pm2{border:1.5px solid #5aa8d6;background:#3b8bbe30;color:#7cc8f5}
+.sr .pm2 svg{width:20px;height:20px}.lg i svg{width:12px;height:12px}
+.tar{margin-top:20px}.tar>p{color:var(--a2);font-size:10px;font-weight:700;letter-spacing:.14em;margin-bottom:4px}
+.tr2{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:10px 0;border-bottom:1px solid var(--l)}
+.tr2 strong{display:flex;align-items:center;gap:7px;font-size:13px}.pi{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:7px;background:#3b8bbe30;color:#7cc8f5}.pi svg{width:16px;height:16px}
+.tt{display:flex;gap:6px;flex-wrap:wrap}.tt button{border:1px solid #383840;border-radius:9px;padding:6px 11px;text-align:center;font-size:12px;font-weight:700;line-height:1.25;transition:.15s}
+.tt button small{display:block;font-size:10px;font-weight:500}.tt .on{border-color:var(--a);background:#e8326a1f}.tt button:disabled{opacity:.3;cursor:not-allowed}
+.toast{position:fixed;right:22px;bottom:22px;z-index:200;background:#1b1b21;border:1px solid #414048;border-radius:10px;padding:12px 16px;font-size:13px;animation:in .2s}
+.toast b{color:#55d58a}
+@media(max-width:1050px){.side2{display:none}.lay{grid-template-columns:minmax(0,680px)}}
+@media(max-width:760px){
+.side{display:none}main{margin-left:0}.top{padding:0 14px;height:62px}.sb{width:auto;flex:1;margin-right:8px}.top .ib.h{display:none}
+.wrap{width:100%;padding:20px 12px 100px}.vis{height:min(420px,76vw)}
+.mn{position:fixed;left:0;right:0;bottom:0;z-index:50;display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid var(--l);background:#0d0d11f5;padding:8px 4px max(8px,env(safe-area-inset-bottom))}
+.mn button{display:grid;place-items:center;gap:2px;font-size:10px;color:#777781;text-align:center}.mn button.on{color:var(--a2)}.mn span{font-size:18px}
+.cg{grid-template-columns:1fr}.cg .card:first-child{grid-row:auto}
+.grid{grid-template-columns:repeat(3,1fr);grid-auto-rows:32vw}
+.rt{grid-template-columns:100px 1fr}.stub{grid-column:1/-1;border-left:0;border-top:1px dashed #3b3b43}
+.dt{grid-template-columns:1fr 1fr}.dt>*:first-child{grid-column:span 2}
+.bd{align-items:end;padding:0}.md{max-height:94vh;border-radius:22px 22px 0 0}
+.cast{grid-template-columns:repeat(2,1fr)}.dp,.tp{grid-template-columns:repeat(2,1fr)}.tg{grid-template-columns:1fr}
+.pm{padding:0 16px 20px}.tabs{margin:24px -16px 0}.pg{margin:0 -16px -20px}.stats{grid-template-columns:repeat(2,1fr)}
+.ms{grid-template-columns:1fr;height:calc(100vh - 240px)}.ms .mc{display:none}.ms.open .ml{display:none}.ms.open .mc{display:flex}.mh .back{display:block}
+.sbw{flex:1;margin-right:8px;width:auto}
+.sr .pm2 svg{width:14px;height:14px}.tt button{padding:6px 9px}
+.show{grid-template-columns:auto 1fr}.show .btn{grid-column:1/-1}.dc,.bc{padding-left:20px;padding-right:20px}.sumb{margin-left:-20px;margin-right:-20px;padding:14px 20px}
+}
+</style>
+<style id="v2">
+html{-webkit-text-size-adjust:100%}body{overflow-x:hidden}
+.wrap{container:w/inline-size;width:min(1120px,calc(100% - clamp(24px,5vw,64px)))}
+/* publications : actions */
+.act{padding:10px 12px 2px}.act>div{display:flex;gap:2px}
+.act .ab{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-width:44px;height:44px;padding:0 10px;margin:0;border-radius:22px;color:#e9e7ea;transition:background .15s,color .15s,transform .15s}
+.ab svg{width:26px;height:26px;stroke-width:1.9}.ab:hover{background:#ffffff10}.ab:active{transform:scale(.92)}
+.ab small{font-size:13px;font-weight:600;color:var(--m)}
+.act .ab.lk{color:#ff3b6b}.ab.lk svg{fill:currentColor;animation:pop .35s}.act .ab.sv{color:#ffca5b}.ab.sv svg{fill:currentColor}
+@keyframes pop{40%{transform:scale(1.35)}}
+.cmt button svg{width:20px;height:20px}.cmt button.lk svg{fill:currentColor}
+.who{cursor:pointer}.who:hover strong{text-decoration:underline}.lnk{color:#fff;cursor:pointer}.lnk:hover{text-decoration:underline}
+.ph .gm .ib{width:40px;height:40px;font-size:16px;letter-spacing:2px;color:#b5b4bc}
+.gmenu.pmn{min-width:290px}.pmn button{display:flex;gap:11px;align-items:center;text-align:left}.pmn .dg{color:#ff6d8f}
+.sub2{display:block;font-size:12px;color:var(--m);margin-top:2px}
+/* classification */
+.age{display:inline-grid;place-items:center;min-width:32px;height:21px;padding:0 7px;border-radius:6px;font-size:11px;font-weight:800;color:#111;background:#f5c542;vertical-align:1px;transition:.15s}
+.age.a16{background:#f08a24}.age.a18{background:#e5484d;color:#fff}.age:hover{transform:scale(1.08);box-shadow:0 0 0 3px #ffffff25}.meta .age{height:24px;font-size:12px}
+.ah2{display:flex;gap:16px;align-items:center;padding:26px 56px 8px 26px}.ah2 p{color:var(--a2);font-size:10px;font-weight:700;letter-spacing:.14em}.ah2 h2{font-size:20px;margin:2px 0}
+.ag{display:grid;place-items:center;width:58px;height:58px;border-radius:14px;font:800 21px var(--f);color:#111;background:#f5c542;flex:none}.ag.a16{background:#f08a24}
+.wl{padding:0 26px}.wi{display:flex;gap:14px;align-items:center;padding:12px 0;border-bottom:1px solid var(--l)}
+.wi>span:first-child{width:46px;height:46px;border-radius:12px;background:#22222a;display:grid;place-items:center;font-size:22px;flex:none}.wi strong{display:block;font-size:14px}.wi small{font-size:12px;line-height:1.4}
+.wn{padding:0 26px 18px;font-size:12px;color:var(--m)}
+.rpo{display:flex;gap:14px;align-items:center;width:100%;padding:13px 0;border-bottom:1px solid var(--l)}.rpo strong{display:block;font-size:14px}.rpo small{font-size:12px}
+.rpo .rd{width:20px;height:20px;border-radius:50%;border:2px solid #55545d;flex:none;display:grid;place-items:center}.rpo.on .rd{border-color:var(--a)}.rpo.on .rd::after{content:"";width:10px;height:10px;border-radius:50%;background:var(--a)}
+/* partage */
+.lkb{display:flex;gap:10px;align-items:center;margin:16px 26px 10px;padding:8px 8px 8px 14px;border:1px solid #383840;border-radius:12px;background:#17171c}
+.lkt{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:13px;color:#cfcdd4;user-select:all}
+.lkb .btn{white-space:nowrap;padding:10px 14px;display:inline-flex;gap:6px;align-items:center}.lkb svg{width:16px;height:16px}.big52{width:52px;height:52px}
+.pill svg{width:16px;height:16px;vertical-align:-3px}.tabs svg{width:16px;height:16px;vertical-align:-3px}
+/* reels */
+.rg{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin:0 -32px -30px}
+.rc{position:relative;aspect-ratio:9/14;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:10px;transition:filter .2s}
+.rc::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,#000c,transparent 62%)}.rc>*{position:relative;z-index:1}.rc:hover{filter:brightness(1.18)}
+.rc strong{font-size:12px;line-height:1.25}.rc small{display:flex;gap:4px;align-items:center;color:#ddd;font-size:11px;margin-top:3px}.rc small svg{width:12px;height:12px;fill:currentColor;stroke:none}
+.rpb{position:absolute!important;top:10px;right:10px;z-index:1}.rpb svg{width:18px;height:18px;filter:drop-shadow(0 1px 3px #0008)}
+.rv{position:fixed;inset:0;z-index:120;background:#000d;display:grid;place-items:center;backdrop-filter:blur(10px)}
+.rph{position:relative;width:min(420px,100vw);height:min(88dvh,780px);border-radius:24px;overflow:hidden;background:#000;isolation:isolate;box-shadow:0 30px 90px #000}
+.rbg{position:absolute;inset:0;background-size:240% 240%!important;animation:drift 9s ease-in-out infinite alternate}
+.rbg::before,.rbg::after{content:"";position:absolute;border-radius:50%;filter:blur(8px);background:radial-gradient(circle,#ffffff3a,transparent 70%)}
+.rbg::before{width:80%;aspect-ratio:1;left:-20%;top:5%;animation:fl1 7s ease-in-out infinite alternate}.rbg::after{width:60%;aspect-ratio:1;right:-15%;bottom:12%;animation:fl2 8s ease-in-out infinite alternate}
+@keyframes drift{to{background-position:100% 100%}}@keyframes fl1{to{transform:translate(55%,45%) scale(1.3)}}@keyframes fl2{to{transform:translate(-50%,-40%) scale(1.25)}}
+.rsh{position:absolute;inset:0;background:linear-gradient(to bottom,#0008,transparent 25%,transparent 45%,#000d)}
+.rbars{position:absolute;top:12px;left:12px;right:12px;z-index:3;display:flex;gap:4px}.rbars i{flex:1;height:3px;border-radius:3px;background:#ffffff40;overflow:hidden}.rbars b{display:block;height:100%;background:#fff;border-radius:3px}
+.rbar{width:0;animation:rb 8s linear forwards}@keyframes rb{to{width:100%}}
+.rtop{position:absolute;top:24px;left:14px;right:10px;z-index:4;display:flex;justify-content:space-between;align-items:center}
+.rwho{display:flex;gap:10px;align-items:center}.rwho strong{display:block;font-size:14px}.rwho small{color:#ddd;font-size:12px}.x2{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:#0006}.x2 svg{width:20px;height:20px}
+.rz{position:absolute;top:80px;bottom:130px;z-index:2}.rl2{left:0;width:30%}.rm2{left:30%;width:40%}.rr2{right:0;width:30%}
+.rpz{position:absolute;inset:0;display:grid;place-items:center;z-index:2;pointer-events:none}.rpz svg{width:64px;height:64px;fill:#fff;stroke:#fff;opacity:.85}
+.rtxt{position:absolute;left:18px;right:84px;bottom:26px;z-index:3;pointer-events:none}.rtxt small{color:#ffffffb0;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.rtxt h2{font-size:26px;line-height:1.1;margin:6px 0}.rtxt p{font-size:14px;color:#e8e6ea}
+.rside{position:absolute;right:12px;bottom:26px;z-index:4;display:grid;gap:14px;justify-items:center}.rside button{display:grid;place-items:center;gap:2px;width:48px;color:#fff}.rside svg{width:28px;height:28px}.rside small{font-size:12px}.rside .lk{color:#ff3b6b}.rside .lk svg{fill:currentColor}
+/* petits plaisirs : cartes carrées centrées */
+.tg{grid-template-columns:repeat(2,1fr);gap:12px}
+.tg article{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:6px;aspect-ratio:1/1;padding:14px 10px;border-radius:18px}
+.tg .ti{width:clamp(54px,14vw,72px);height:clamp(54px,14vw,72px);font-size:clamp(28px,7vw,38px);border-radius:18px}
+.tg article>div:nth-child(2){display:grid;justify-items:center;gap:2px}.tg strong{font-size:14px}.tg b{font-size:14px;margin-top:4px}
+.qp{grid-column:auto;justify-content:center;margin-top:4px;gap:12px}.tg article.on{box-shadow:0 0 0 1px #e8326a80,0 10px 30px #e8326a22}
+/* logo animé */
+.brand .bm{transition:box-shadow .4s,transform .4s}.bt{display:inline-flex}.bt span{display:inline-block}
+.brand:hover .bm{animation:spin .8s cubic-bezier(.2,.8,.2,1);box-shadow:0 0 0 7px #e8326a26,0 8px 30px #e8326a99}
+.brand:hover .bt span{animation:wave .6s ease calc(var(--i)*45ms)}
+@keyframes spin{60%{transform:rotate(380deg) scale(1.18)}to{transform:rotate(360deg) scale(1.08)}}
+@keyframes wave{40%{transform:translateY(-6px);color:var(--a2)}}
+@media(prefers-reduced-motion:reduce){.brand:hover .bm,.brand:hover .bt span,.rbg,.rbg::before,.rbg::after{animation:none!important}}
+/* responsive */
+@media(min-width:761px) and (max-width:1100px){
+.side{width:76px;padding:22px 10px 14px;align-items:center}.side .brand{padding:0;justify-content:center}.bt,.lb,.prem{display:none}
+.nav{margin-top:34px;width:100%}.ni{justify-content:center;padding:0;min-height:50px;gap:0;position:relative}.ni .cnt{position:absolute;top:6px;right:8px;width:18px;height:18px;font-size:10px;margin:0}
+.ni:hover,.ni.on{transform:none}.foot{flex-direction:column;margin-top:auto}.foot .row{flex:none!important;justify-content:center}.foot .row>span{display:none}
+main{margin-left:76px}.top{padding:0 20px}.lay{grid-template-columns:minmax(0,1fr) minmax(240px,290px)}.side2{display:block}}
+@container w (max-width:860px){.lay{grid-template-columns:minmax(0,680px)}.side2{display:none}}
+@container w (max-width:760px){
+.rt{grid-template-columns:120px 1fr}.stub{grid-column:1/-1;border-left:0;border-top:1px dashed #3b3b43;grid-template-columns:auto 1fr auto;justify-items:start;gap:12px;padding:14px 18px;text-align:left}
+.stub .qr{width:62px;height:62px}.stub>small{display:none}.dt{grid-template-columns:1fr 1fr}.dt>*:first-child{grid-column:span 2}.hd{flex-wrap:wrap}}
+@container w (max-width:560px){
+.rt{grid-template-columns:1fr}.rt>i{height:150px}.vis{height:auto;aspect-ratio:4/5}.pc{left:18px;right:18px;bottom:22px}
+.pid .av{width:84px;height:84px;font-size:26px}.pid{margin-top:-60px;gap:10px}.pid>div{min-width:calc(100% - 100px)}.pid .pill{flex:1;text-align:center}
+.pcv{height:170px}.pm{padding:0 16px 20px}.tabs{margin:24px -16px 0}.pg,.rg{margin:0 -16px -20px}.stats{grid-template-columns:repeat(2,1fr)}.stats button:nth-child(2){border-right:0}.stats button:nth-child(-n+2){border-bottom:1px solid #2f2f37}
+.watched-list{grid-template-columns:1fr}}
+.cg{grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));align-items:start}.cg .card:first-child{grid-row:auto}
+.grid{grid-template-columns:repeat(auto-fill,minmax(130px,1fr));grid-auto-rows:clamp(110px,22vw,150px)}.grid .wide{grid-column:span 2}
+@media(max-width:760px){
+.top{height:60px;padding:0 10px;gap:4px}.top .ib{width:40px;height:40px}.sbw{min-width:0}
+.wrap{width:100%;padding:14px clamp(10px,3vw,16px) calc(92px + env(safe-area-inset-bottom))}
+.tres{position:fixed;left:10px;right:10px;top:66px;max-height:calc(100dvh - 150px)}.gmenu{max-width:calc(100vw - 20px)}
+.md{max-height:92dvh}.ms{height:calc(100dvh - 250px);min-height:380px}.lg2{min-height:100dvh}
+.card{border-radius:16px}.hd h1{font-size:22px}}
+@media(max-width:520px){.rph{width:100vw;height:100dvh;border-radius:0}.ah2{padding-right:50px}.tg{gap:10px}.rtxt h2{font-size:22px}}
+@media(pointer:coarse){.ib,.ni,.mn button{min-height:44px}.pill,.tt button{min-height:40px}.age{min-height:26px}}
+<style id="v3">
+.tg article{position:relative;aspect-ratio:auto;justify-content:flex-start;gap:4px;padding:24px 12px 14px}
+.tg .ti{width:clamp(76px,20vw,96px);height:clamp(76px,20vw,96px);font-size:clamp(40px,10vw,52px);border-radius:26px;background:linear-gradient(145deg,#3b2631,#241f29);box-shadow:inset 0 0 0 1px #ffffff12;margin-bottom:6px}
+.tg article.on .ti{background:linear-gradient(145deg,#5a2640,#2a1f2e)}
+.tt2{display:grid;justify-items:center;gap:2px}.tg .tt2 b{font-size:15px;margin-top:6px}
+.tbd{position:absolute;top:10px;left:10px;background:#ffb15f22;color:#ffb15f;border-radius:99px;padding:3px 9px;font-size:10px;font-weight:700}
+.tex{display:block;font-style:normal;font-size:11px;color:#a5a3ad;margin-top:3px;line-height:1.35}
+.qp{margin-top:auto;padding-top:8px}
+</style></head>
+<body><div id="app"></div><div id="ov"></div><div id="ts"></div>
+<script>
+const $=s=>document.querySelector(s),cap=s=>s[0].toUpperCase()+s.slice(1);
+const M=[
+{id:1,t:"DUNE : DEUXIÈME PARTIE",tag:"Longue vie aux combattants.",g:"Science-fiction",d:"2h 46",r:"4,8",age:"12+",y:2024,dir:"Denis Villeneuve",st:"Warner Bros. France",cin:"UGC Ciné Cité Les Halles",lk:"24,8 k",desc:"Paul Atreides s’unit à Chani et aux Fremen pour mener la révolte contre ceux qui ont détruit sa famille.",c:["#ff4f79","#3a0f2a"],cast:[["Timothée Chalamet","Paul Atreides"],["Zendaya","Chani"],["Rebecca Ferguson","Jessica"],["Javier Bardem","Stilgar"]]},
+{id:2,t:"OPPENHEIMER",tag:"Le monde change à jamais.",g:"Biopic",d:"3h 01",r:"4,7",age:"12+",y:2023,dir:"Christopher Nolan",st:"Universal Pictures",cin:"Le Grand Rex",lk:"18,2 k",desc:"Le destin de J. Robert Oppenheimer, physicien au cœur du projet Manhattan et de la création de la bombe atomique.",c:["#9b6cff","#1a0f3a"],cast:[["Cillian Murphy","J. R. Oppenheimer"],["Emily Blunt","Kitty"],["Matt Damon","Leslie Groves"],["Robert Downey Jr.","Lewis Strauss"]]},
+{id:3,t:"THE SUBSTANCE",tag:"Vous rêvez d’une meilleure version de vous-même ?",g:"Drame horrifique",d:"2h 21",r:"4,5",age:"16+",y:2024,dir:"Coralie Fargeat",st:"Metropolitan FilmExport",cin:"MK2 Bibliothèque",lk:"31,4 k",desc:"Une célébrité sur le déclin découvre un produit mystérieux capable de générer une version plus jeune d’elle-même.",c:["#3cbcf2","#0f2a3a"],cast:[["Demi Moore","Elisabeth Sparkle"],["Margaret Qualley","Sue"],["Dennis Quaid","Harvey"],["Hugo Diego Garcia","Diego"]]}];
+const CIN=[
+{n:"Le Grand Rex",a:"1 boulevard Poissonnière, Paris 2e",km:"2,4 km",f:"Grand Large · Dolby Atmos",c:["#5a1230","#14141b"],cur:[[0,["14:20","18:10","21:30"]],[1,["16:00","20:15"]]],up:"The Batman Part II · 30 septembre 2027"},
+{n:"UGC Ciné Cité Les Halles",a:"7 place de la Rotonde, Paris 1er",km:"3,1 km",f:"27 salles · VOST · VF",c:["#2a1850","#14141b"],cur:[[2,["13:45","17:25","22:05"]],[0,["15:10","19:40"]]],up:"Avatar : De feu et de cendres · 16 décembre 2026"},
+{n:"MK2 Bibliothèque",a:"128 avenue de France, Paris 13e",km:"4,8 km",f:"18 salles · Art et Essai",c:["#0f3a4a","#14141b"],cur:[[1,["12:30","18:00","21:20"]],[2,["14:50","20:40"]]],up:"Avengers : Doomsday · 18 décembre 2026"}];
+const D=[0,1,2,3].map(i=>{const d=new Date();d.setDate(d.getDate()+i);return{day:i?cap(d.toLocaleDateString("fr-FR",{weekday:"long"})):"Aujourd’hui",n:d.getDate(),mo:d.toLocaleDateString("fr-FR",{month:"short"}).replace(".","").toUpperCase(),long:d.getDate()+" "+d.toLocaleDateString("fr-FR",{month:"long"})}});
+const TIMES=["18:10","20:30","21:45","22:15"];
+const TR=[["popcorn","Popcorn","Caramel ou salé · Grand",6.5,"🍿","Best-seller","Maïs soufflé frais, format 120 g"],["boisson","Boisson","50 cl · Au choix",4.5,"🥤","","Boisson fraîche, glaçons inclus"],["bonbons","Bonbons","Assortiment · 180 g",4,"🍬","Gourmand","Mélange de 6 sortes à partager"],["duo","Menu duo","2 popcorns + 2 boissons",16,"👥","Économisez 6 €","Idéal à deux · 22 € achetés séparément"]];
+const EX=["Dune : Deuxième partie","Oppenheimer","Anatomie d’une chute","Pauvres Créatures","The Substance","La Zone d’intérêt","Perfect Days","Emilia Pérez","Furiosa","Past Lives","Le Comte de Monte-Cristo","Flow"];
+const CATS=["Pour vous","Tendances","Nouveautés","Drame","Animation","Documentaire"];
+const GR=i=>{const c=M[i%3].c,h=[0,40,80,120,200,260][i%6];return`background:linear-gradient(${135+i*20}deg,${c[0]},hsl(${(h+300)%360} 45% 14%))`};
+const ART={
+1:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 600"><defs><linearGradient id="a" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1d0a18"/><stop offset=".42" stop-color="#b8321f"/><stop offset=".68" stop-color="#ff9a52"/></linearGradient><radialGradient id="s"><stop offset="0" stop-color="#fff1cc"/><stop offset=".5" stop-color="#ffd08a" stop-opacity=".8"/><stop offset="1" stop-color="#ffb36b" stop-opacity="0"/></radialGradient></defs><rect width="400" height="600" fill="url(#a)"/><circle cx="210" cy="255" r="160" fill="url(#s)"/><circle cx="210" cy="255" r="62" fill="#fff4d6"/><circle cx="322" cy="190" r="19" fill="#ffd9a0"/><path d="M0 385C80 345 160 365 240 335C300 312 360 335 400 325V600H0Z" fill="#c4501f"/><path d="M0 445C100 395 180 435 260 405C330 377 370 405 400 397V600H0Z" fill="#9a3516"/><path d="M0 505C90 462 200 510 290 470C340 450 380 462 400 456V600H0Z" fill="#5c1b10"/><path d="M0 575C120 545 240 585 400 545V600H0Z" fill="#240a08"/><circle cx="205" cy="405" r="5" fill="#1a0808"/><path d="M199 433L203 411H209L213 433Z" fill="#1a0808"/><path d="M50 520C60 505 70 500 80 506" stroke="#2a0c0a" stroke-width="3" fill="none"/></svg>`,
+2:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 600"><defs><radialGradient id="f" cx="200" cy="255" r="220" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#fffbe6"/><stop offset=".2" stop-color="#ffd36b"/><stop offset=".45" stop-color="#ff7a1a"/><stop offset=".75" stop-color="#8a1d0b"/><stop offset="1" stop-color="#0a0608" stop-opacity="0"/></radialGradient></defs><rect width="400" height="600" fill="#0a0608"/>${Array.from({length:18},(_,i)=>`<line x1="200" y1="255" x2="${(200+420*Math.cos(i*Math.PI/9)).toFixed(0)}" y2="${(255+420*Math.sin(i*Math.PI/9)).toFixed(0)}" stroke="#ffb35a" stroke-opacity=".13" stroke-width="3"/>`).join("")}<circle cx="200" cy="255" r="230" fill="url(#f)"/><circle cx="200" cy="255" r="120" fill="none" stroke="#ffb35a" stroke-opacity=".35" stroke-width="2"/><circle cx="200" cy="255" r="175" fill="none" stroke="#ff7a1a" stroke-opacity=".22" stroke-width="2"/><rect y="440" width="400" height="160" fill="#060303"/><path d="M105 600C115 545 158 512 200 512C242 512 285 545 295 600Z" fill="#030202"/><rect x="178" y="468" width="44" height="50" fill="#030202"/><ellipse cx="200" cy="470" rx="80" ry="12" fill="#030202"/><path d="M152 468C152 430 170 418 200 418C230 418 248 430 248 468Z" fill="#030202"/><rect x="152" y="452" width="96" height="9" fill="#7a1d0b"/></svg>`,
+3:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 600"><defs><linearGradient id="b" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#06121d"/><stop offset="1" stop-color="#0f3550"/></linearGradient><filter id="g" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="9"/></filter></defs><rect width="400" height="600" fill="url(#b)"/><rect width="200" height="600" fill="#ff2e93" opacity=".16"/><path d="M30 520C40 410 80 360 120 360C160 360 200 410 210 520" fill="none" stroke="#ff4fa3" stroke-width="3"/><circle cx="120" cy="262" r="46" fill="none" stroke="#ff4fa3" stroke-width="3"/><path d="M190 520C200 400 245 350 290 350C335 350 380 400 390 520Z" fill="#3cbcf2" opacity=".88"/><circle cx="290" cy="248" r="46" fill="#3cbcf2" opacity=".88"/><rect x="198" y="0" width="4" height="190" fill="#8dff4f" filter="url(#g)"/><rect x="198" y="0" width="4" height="190" fill="#b6ff7a"/><path d="M200 190C188 214 188 232 200 240C212 232 212 214 200 190Z" fill="#b6ff7a"/><g transform="rotate(-35 200 430)"><rect x="140" y="418" width="130" height="24" rx="7" fill="#d8f7ff" opacity=".92"/><rect x="147" y="423" width="76" height="14" rx="4" fill="#8dff4f"/><rect x="270" y="427" width="50" height="6" fill="#d8f7ff"/><rect x="128" y="406" width="12" height="48" rx="3" fill="#d8f7ff"/><rect x="100" y="426" width="30" height="8" fill="#d8f7ff"/></g><rect y="540" width="400" height="60" fill="#04101a" opacity=".7"/></svg>`};
+const ARTU={},artU=m=>ARTU[m.id]||(ARTU[m.id]="data:image/svg+xml,"+encodeURIComponent(ART[m.id]).replace(/'/g,"%27").replace(/\(/g,"%28").replace(/\)/g,"%29"));
+const bg=m=>`background:${m.img?`url('${m.img}') center/cover,`:""}url('${artU(m)}') center/cover,linear-gradient(140deg,${m.c[0]},${m.c[1]})`;
+const ini=n=>n.split(" ").map(w=>w[0]).slice(0,2).join("");
+const eur=n=>n.toFixed(2).replace(".",",")+" €";
+const COM={
+1:[{u:"marc_cine",t:"Visuellement époustouflant, la scène des vers m’a scotché.",w:"il y a 2 h",n:14},{u:"sarah.b",t:"Zendaya et Timothée, quel duo !",w:"il y a 5 h",n:9},{u:"lucas_75",t:"À voir absolument en IMAX.",w:"il y a 1 j",n:21}],
+2:[{u:"nolanfan",t:"Cillian Murphy est monstrueux dans ce rôle.",w:"il y a 3 h",n:32},{u:"julie.film",t:"3 heures qui passent sans qu’on les voie.",w:"il y a 8 h",n:11}],
+3:[{u:"horror_lover",t:"Un final complètement fou, je n’ai pas respiré.",w:"il y a 1 h",n:18},{u:"camille_d",t:"Demi Moore mérite tous les prix.",w:"il y a 6 h",n:27},{u:"paris_cine",t:"Pas pour les cœurs sensibles, mais brillant.",w:"il y a 2 j",n:6}]};
+const slug=n=>n.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]+/g,".").replace(/^\.|\.$/g,"");
+const PE={};
+M.forEach(m=>m.cast.forEach(c=>{const k=slug(c[0]);PE[k]={k,n:c[0],h:"@"+k,img:c[2],role:"Rôle : "+c[1],bio:"Acteur·rice. À l’affiche de « "+m.t.charAt(0)+m.t.slice(1).toLowerCase()+" ». Cinéma, tournages et coulisses.",f:(k.length*2.3%9+1).toFixed(1).replace(".",",")}}));
+Object.values(COM).flat().forEach(c=>{if(!PE[c.u])PE[c.u]={k:c.u,n:c.u.replace(/[._]/g," ").replace(/\b\w/g,x=>x.toUpperCase()),h:"@"+c.u,role:"Cinéphile · Paris",bio:"Cinéphile. Je note tout ce que je vois en salle.",f:(c.u.length*3.7%9+1).toFixed(1).replace(".",",")}});
+M.forEach(m=>{const k=slug(m.st);if(!PE[k])PE[k]={k,n:m.st,h:"@"+k,role:"Compte officiel",bio:"Compte officiel du distributeur. Bandes-annonces, séances événement et actualités au "+m.cin+".",f:(k.length*2.9%9+1).toFixed(1).replace(".",",")}});
+PE.aurorapictures={k:"aurorapictures",n:"Aurora Pictures",h:"@aurorapictures",role:"Distributeur",bio:"Distributeur indépendant. Avant-premières, coulisses et séances événement dans toute la France.",f:"12,4"};
+const pa=p=>p.img?`style="background:url('${p.img}') center/cover,#222;color:transparent"`:"";
+const hm=()=>new Date().toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"});
+const REP=["Haha oui carrément !","Bonne idée, dis-moi quand 🎬","Je suis d’accord à 100 %","On en reparle ce soir ?","Top, merci Léa !"];
+let CV={"sarah.b":[{me:0,t:"Salut Léa ! Tu viens à la séance de Dune ce soir ?",w:"18:02"},{me:1,t:"Oui, j’ai pris E7 et E8 😄",w:"18:05"},{me:0,t:"Top, on se retrouve devant la salle !",w:"18:06"}],"nolanfan":[{me:0,t:"Tu as vu Oppenheimer en 70 mm ?",w:"hier"},{me:1,t:"Pas encore, il faut que je réserve !",w:"hier"}],"camille_d":[{me:1,t:"Ta critique de The Substance est géniale 👏",w:"lun."},{me:0,t:"Merci ! On se fait une séance bientôt ?",w:"lun."}]};
+const esc=s=>(s||"").replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+const AVS=[["🎬","linear-gradient(135deg,#ff275f,#a321df)"],["🍿","linear-gradient(135deg,#ffb15f,#e8326a)"],["🎞","linear-gradient(135deg,#3cbcf2,#3a1050)"],["⭐","linear-gradient(135deg,#ffca5b,#ff6a8d)"],["👾","linear-gradient(135deg,#55d58a,#0f3a4a)"],["🦊","linear-gradient(135deg,#ff9d50,#5a1230)"],["🌙","linear-gradient(135deg,#9b6cff,#14141b)"],["🎭","linear-gradient(135deg,#e8326a,#0f2a3a)"]];
+const ME0={n:"Léa Martin",h:"leamovies",city:"Paris",tag:"Cinéphile passionnée",bio:"Je collectionne les émotions en 24 images/seconde. Drames intimistes, science-fiction et salles obscures.",photo:null,av:-1,cover:null};
+const meI=(x="",m)=>{m=m||S.me;const a=m.av>=0?AVS[m.av]:null,st=m.photo?`background:url('${m.photo}') center/cover;color:transparent`:a?`background:${a[1]}`:"";return`<i class="av" style="${st};${x}">${m.photo?"":a?a[0]:esc(ini(m.n||"?"))}</i>`};
+const coverStyle=c=>!c?"":c.src?`background:url('${c.src}') center/cover`:c.p<3?bg(M[c.p]):GR(c.p-3);
+const T1=[["14:20","18:10","21:30"],["13:45","17:25","22:05"],["12:30","18:00","21:20"]],T2=[["16:00","20:15"],["15:10","19:40"],["14:50","20:40"]];
+const UPS=["The Batman Part II · 30 septembre 2027","Avatar : De feu et de cendres · 16 décembre 2026","Avengers : Doomsday · 18 décembre 2026"];
+const CC=(n,a,km,f,col,i)=>({n,a,km,f,c:[col,"#14141b"],cur:[[i%3,T1[i%3]],[(i+1)%3,T2[i%3]]],up:UPS[i%3]});
+const FL={France:"🇫🇷",Belgique:"🇧🇪",Suisse:"🇨🇭",Canada:"🇨🇦"};
+const GEO={France:{Paris:CIN,
+Lyon:[CC("Pathé Bellecour","Presqu’île, Lyon 2e","1,1 km","12 salles · VF · VOST","#5a1230",0),CC("Cinéma Comœdia","Gerland, Lyon 7e","2,6 km","Art et Essai · VOST","#0f3a4a",1)],
+Marseille:[CC("Les Variétés","Centre-ville, Marseille 1er","1,4 km","VF · VOST","#2a1850",2),CC("Cinéma Le Prado","Prado, Marseille 8e","3,2 km","Grand écran · VF","#5a1230",0)],
+Lille:[CC("UGC Ciné Cité Lille","Centre, Lille","1,0 km","14 salles · VF · VOST","#0f3a4a",1),CC("Le Majestic","Centre, Lille","1,8 km","Art et Essai","#2a1850",2)],
+Bordeaux:[CC("Utopia Bordeaux","Saint-Pierre, Bordeaux","1,2 km","Art et Essai · VOST","#5a1230",0),CC("CGR Le Français","Centre, Bordeaux","1,9 km","8 salles · VF · VOST","#0f3a4a",1)]},
+Belgique:{Bruxelles:[CC("Cinéma Palace","Centre, Bruxelles","1,3 km","Grande salle · VOST","#2a1850",2),CC("Cinéma Galeries","Galeries Royales, Bruxelles","1,5 km","Art et Essai · VOST","#5a1230",0)],
+Liège:[CC("Le Churchill","Centre, Liège","1,0 km","Art et Essai · VOST","#0f3a4a",1),CC("Sauvenière","Centre, Liège","1,7 km","Art et Essai · VOST","#2a1850",2)]},
+Suisse:{Genève:[CC("Les Scala","Centre, Genève","1,2 km","Grand écran · VF · VOST","#5a1230",0),CC("Cinérama Empire","Centre, Genève","2,0 km","Art et Essai · VOST","#0f3a4a",1)],
+Lausanne:[CC("Pathé Flon","Flon, Lausanne","1,1 km","VF · VOST","#2a1850",2),CC("Casino de Montbenon","Montbenon, Lausanne","2,3 km","Art et Essai · VOST","#5a1230",0)]},
+Canada:{Montréal:[CC("Cinéma du Parc","Mile End, Montréal","2,1 km","Art et Essai · VOST","#0f3a4a",1),CC("Cineplex Forum","Centre-ville, Montréal","1,4 km","IMAX · VF · VOST","#2a1850",2)],
+Québec:[CC("Cinéma Cartier","Montcalm, Québec","1,6 km","Art et Essai · VOST","#5a1230",0),CC("Le Clap","Sainte-Foy, Québec","4,2 km","Art et Essai · VOST","#0f3a4a",1)]}};
+const NT=[{id:1,k:"s",t:"Nouvelle séance : <b>Dune : Deuxième partie</b>, ce soir à 20:30 au Grand Rex",w:"il y a 10 min",a:"mv",v:"1"},{id:2,k:"r",t:"<b>sarah.b</b> a répondu à votre commentaire",w:"il y a 1 h",a:"cm",v:"1"},{id:3,k:"m",t:"<b>Camille D.</b> vous a envoyé un message",w:"il y a 3 h",a:"dm",v:"camille_d"},{id:4,k:"t",t:"Rappel : <b>Oppenheimer</b> demain à 21:45 · places F5, F6",w:"hier",a:"nav",v:"Mes billets"},{id:5,k:"r",t:"<b>nolanfan</b> a aimé votre critique d’Oppenheimer",w:"hier",a:"pp",v:"nolanfan"}];
+const S={nav:"Accueil",mv:null,book:false,step:1,di:0,time:"20:30",seats:["E7","E8"],tr:{},liked:[2],saved:[],search:false,cm:null,pp:null,chat:null,tier:{},hid:[],pref:{},rep:null,age:null,share:null,rl:null,rlk:{},rpause:false,rmute:false,profs:[null],cur:0,out:false,sf:false,q:"",nt:NT.map(n=>({...n,read:0})),gm:null,country:"France",city:"Paris",bcin:"Le Grand Rex",bloc:"1 boulevard Poissonnière, Paris 2e",me:{...ME0},dr:null,edit:false,set:false,st:{n1:1,n2:1,n3:1,priv:0,fav:0},ptab:"Publications",ecat:"Pour vous",ins:null,fol:{},snd:true,
+tickets:[{id:101,m:1,date:D[1].day+" "+D[1].long,time:"21:45",seats:["F5","F6"],cin:"Le Grand Rex · Salle 2",ex:[]}]};
+const SV=p=>`<svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${p}</svg>`;
+const IC={home:SV('<path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>'),ticket:SV('<path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2z"/><path d="M13 5v2M13 11v2M13 17v2"/>'),msg:SV('<path d="M7.9 20A9 9 0 1 0 4 16.1L2 22z"/>')};
+IC.search=SV('<circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>');
+IC.bell=SV('<path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/>');
+IC.vol=SV('<path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>');
+IC.mute=SV('<path d="M11 5 6 9H2v6h4l5 4z"/><path d="m22 9-6 6M16 9l6 6"/>');
+IC.out=SV('<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5M21 12H9"/>');
+IC.addu=SV('<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/>');
+IC.pmr='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="16" cy="4" r="1"/><path d="m18 19 1-7-6 1"/><path d="m5 8 3-3 5.5 3-2.36 3.5"/><path d="M4.24 14.5a5 5 0 0 0 6.88 6"/><path d="M13.76 17.5a5 5 0 0 0-6.88-6"/></svg>';
+IC.heart=SV('<path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7z"/>');
+IC.send=SV('<path d="m22 2-7 20-4-9-9-4z"/><path d="M22 2 11 13"/>');
+IC.bookmark=SV('<path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>');
+IC.flag=SV('<path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><path d="M4 22v-7"/>');
+IC.plus=SV('<circle cx="12" cy="12" r="10"/><path d="M8 12h8M12 8v8"/>');
+IC.minus=SV('<circle cx="12" cy="12" r="10"/><path d="M8 12h8"/>');
+IC.eyeoff=SV('<path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"/><path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"/><path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"/><path d="m2 2 20 20"/>');
+IC.link=SV('<path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>');
+IC.user=SV('<path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>');
+IC.play=SV('<polygon points="6 3 20 12 6 21 6 3"/>');
+IC.film=SV('<rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 3v18M3 7.5h4M3 12h18M3 16.5h4M17 3v18M17 7.5h4M17 16.5h4"/>');
+IC.grid=SV('<rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/>');
+IC.x=SV('<path d="M18 6 6 18M6 6l12 12"/>');
+IC.share=SV('<circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.59 13.51 6.83 3.98M15.41 6.51l-6.82 3.98"/>');
+IC.explore=SV('<circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>');
+IC.cine=SV('<path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/><path d="M10 6h4M10 10h4M10 14h4M10 18h4"/>');
+const NAV=[["Accueil",IC.home],["Explorer",IC.explore],["Mes billets",IC.ticket],["Cinémas",IC.cine],["Messages",IC.msg]];
+const TAR={plein:["Plein tarif",15,"Plein"],enfant:["Enfant (–14 ans)",9.5,"Enfant"],pmr:["PMR",11,"PMR"],acc:["Accompagnateur PMR",11,"Accomp."]};
+const isPmr=s=>s[0]=="G"&&[1,2,11,12].includes(+s.slice(1));
+const tierOf=s=>{const t=S.tier[s];if(t&&TAR[t]&&!(t=="pmr"&&!isPmr(s))&&!(t=="acc"&&!S.seats.some(isPmr)))return t;return isPmr(s)?"pmr":"plein"};
+const grp=()=>{const g={};S.seats.forEach(s=>{const k=tierOf(s);g[k]=(g[k]||0)+1});return g};
+const seatsTotal=()=>S.seats.reduce((a,s)=>a+TAR[tierOf(s)][1]+1.5,0);
+const trTot=()=>TR.reduce((s,t)=>s+(S.tr[t[0]]||0)*t[3],0),total=()=>seatsTotal()+trTot();
+let tt;const toast=m=>{$("#ts").innerHTML=`<div class="toast"><b>✓</b> ${m}</div>`;clearTimeout(tt);tt=setTimeout(()=>$("#ts").innerHTML="",1800)};
+let ac;const beep=p=>{if(!S.snd)return;ac=ac||new(window.AudioContext||window.webkitAudioContext)();const o=ac.createOscillator(),g=ac.createGain(),n=ac.currentTime;o.frequency.setValueAtTime(p?520:390,n);o.frequency.exponentialRampToValueAtTime(p?680:470,n+.045);g.gain.setValueAtTime(.0001,n);g.gain.exponentialRampToValueAtTime(p?.055:.025,n+.006);g.gain.exponentialRampToValueAtTime(.0001,n+.055);o.connect(g);g.connect(ac.destination);o.start(n);o.stop(n+.06)};
+const qr=id=>{let s=id,h="";for(let i=0;i<81;i++){s=(s*9301+49297)%233280;const c=i%9<2&&i<18||i%9>6&&i<18||i%9<2&&i>62;h+=`<s class="${s%3&&!c?"o":""}"></s>`}return h};
+
+function home(){return`
+<div class="hd"><div><p class="eb">À L’AFFICHE</p><h1>Les films du moment</h1></div><button class="fl" data-a="nav" data-v="Explorer">Tout voir ›</button></div>
+<div class="stories">${M.map(m=>`<button class="story" data-a="mv" data-v="${m.id}"><span class="ring"><i style="${bg(m)}">${ini(m.t)}</i></span>${m.t.split(" ")[0].toLowerCase()}</button>`).join("")}${M[0].cast.map(c=>`<button class="story" data-a="pp" data-v="${slug(c[0])}"><span class="ring" style="background:#444"><i>${ini(c[0])}</i></span>${c[0].split(" ")[0].toLowerCase()}</button>`).join("")}</div>
+<div class="lay"><section class="feed">${M.filter(m=>!S.hid.includes(m.id)).map((m,i)=>{const lk=S.liked.includes(m.id),sv=S.saved.includes(m.id);return`<article class="card">
+<div class="ph"><span class="who" data-a="pp" data-v="${slug(m.st)}"><i class="av" style="${bg(m)}">▶</i><span><strong>${m.st}</strong><small>📍 ${m.cin}</small></span></span><div class="gm"><button class="ib" data-a="gopen" data-v="post${m.id}" aria-label="Plus d’options">•••</button>${S.gm=="post"+m.id?postMenu(m):""}</div></div>
+<button class="vis" style="${bg(m)}" data-a="mv" data-v="${m.id}"><span class="sh"></span><span class="pc"><small>UN FILM DE ${m.dir.toUpperCase()}</small><strong>${m.t}</strong><em>${m.tag}</em></span><span class="badge">★ ${m.r}</span>${m.id!=1?"":'<span class="bl">AVANT-PREMIÈRE</span>'}</button>
+<div class="act"><div><button class="ab ${lk?"lk":""}" data-a="like" data-v="${m.id}" aria-label="J’aime" aria-pressed="${lk}">${IC.heart}</button><button class="ab" data-a="cm" data-v="${m.id}" aria-label="Commenter">${IC.msg}<small>${183+COM[m.id].length}</small></button><button class="ab" data-a="shareP" data-v="${m.id}" aria-label="Envoyer">${IC.send}</button></div><button class="ab ${sv?"sv":""}" data-a="save" data-v="${m.id}" aria-label="Enregistrer" aria-pressed="${sv}">${IC.bookmark}</button></div>
+<div class="body"><strong>${lk&&m.id==1?"24,9 k":m.lk} J’aime</strong><b class="lnk" data-a="pp" data-v="aurorapictures">aurorapictures</b> ${m.desc}<button data-a="cm" data-v="${m.id}" style="display:block;margin-top:7px;color:var(--m);font-size:12px">Voir les ${183+COM[m.id].length} commentaires</button><div class="tags">#${m.g.replace("-","")} #cinema #avantpremiere</div></div>
+<div class="show"><div class="sd"><span>${D[0].mo}</span><b>${D[0].n}</b></div><div><small>PROCHAINE SÉANCE</small><strong>Ce soir à 20:30</strong><span class="sub2">${m.d} · VF · IMAX · ${ageB(m)}</span></div><button class="btn" data-a="book" data-v="${m.id}">Réserver 🎟</button></div></article>`}).join("")}${S.hid.length?`<button class="pill" data-a="unhide" style="justify-self:center">Rétablir ${S.hid.length} post${S.hid.length>1?"s":""} masqué${S.hid.length>1?"s":""}</button>`:""}</section>
+<aside class="side2"><h2>Près de chez vous</h2><div class="cc"><strong>Le Grand Rex</strong><small>1 boulevard Poissonnière · 2,4 km</small><div class="mt">${["18:10","20:30","22:15"].map(t=>`<button data-a="book" data-v="1" data-t="${t}">${t}</button>`).join("")}</div></div>
+<h2>Populaire cette semaine</h2>${M.map((m,i)=>`<button class="tr" data-a="mv" data-v="${m.id}"><b>0${i+1}</b><i style="${bg(m)}"></i><span><strong>${m.t}</strong><small>${m.g} · ${m.d}</small><small style="color:#ffca5b"> ★ ${m.r}</small></span></button>`).join("")}
+<h2 style="margin-top:24px">À suivre</h2>${M[0].cast.slice(0,3).map((c,i)=>`<div class="row"><i data-a="pp" data-v="${slug(c[0])}" class="av">${ini(c[0])}</i><span data-a="pp" data-v="${slug(c[0])}"><strong>${c[0]}</strong><small>${i==1?"Actrice":"Artiste"}</small></span><button class="fl ${S.fol["s"+i]?"on":""}" data-a="fol" data-v="s${i}">${S.fol["s"+i]?"Suivi":"Suivre"}</button></div>`).join("")}</aside></div>`}
+
+function explore(){const EXC=[["Tendances"],["Tendances","Drame"],["Drame"],["Drame"],["Tendances","Nouveautés"],["Drame"],["Drame"],["Nouveautés","Drame"],["Nouveautés"],["Drame"],["Nouveautés"],["Animation","Nouveautés"]],L=EX.map((t,j)=>[t,j]).filter(([t,j])=>S.ecat=="Pour vous"||EXC[j].includes(S.ecat));return`
+<div class="hd"><div><p class="eb">DÉCOUVRIR</p><h1>Explorer</h1><span>Films, talents et histoires sélectionnés pour vous.</span></div></div>
+<div class="cats">${CATS.map(c=>`<button class="${S.ecat==c?"on":""}" data-a="ecat" data-v="${c}">${c}</button>`).join("")}</div>
+<button class="feat" data-a="mv" data-v="1"><div><small>↗ SÉLECTION DE LA SEMAINE</small><strong>Denis Villeneuve réinvente le grand spectacle</strong><em style="color:#eee;font-size:13px">Dune : Deuxième partie, à redécouvrir en salle</em></div></button>
+<div class="hd" style="margin:28px 0 0"><h2 style="font-size:16px">Inspirations du moment</h2><small>Mise à jour aujourd’hui</small></div>
+${L.length?"":`<div class="empty" style="margin-top:14px"><h2>Rien ici pour l’instant</h2><small>Aucun film dans cette catégorie.</small></div>`}<div class="grid">${L.map(([t,j],i)=>`<button class="${i==2||i==7?"tall":""} ${i==0||i==5?"wide":""}" style="${GR(j)}" data-a="mv" data-v="${M[j%3].id}">${t}${i%4==0?'<span style="position:absolute;top:9px;right:9px">🎬</span>':""}</button>`).join("")}</div>`}
+
+function cinemas(){return`
+<div class="hd"><div><p class="eb">AUTOUR DE VOUS</p><h1>Vos cinémas</h1><span>Les films à l’affiche et les prochaines sorties dans les salles de ${S.city}.</span></div><div class="geo"><div class="gm"><button class="pill" data-a="gopen" data-v="country">${FL[S.country]} ${S.country} ▾</button>${S.gm=="country"?`<div class="gmenu">${Object.keys(GEO).map(c=>`<button class="${c==S.country?"on":""}" data-a="ctry" data-v="${c}">${FL[c]} ${c}</button>`).join("")}</div>`:""}</div><div class="gm"><button class="pill" data-a="gopen" data-v="city">📍 ${S.city} ▾</button>${S.gm=="city"?`<div class="gmenu">${Object.keys(GEO[S.country]).map(c=>`<button class="${c==S.city?"on":""}" data-a="cty" data-v="${c}">📍 ${c}</button>`).join("")}</div>`:""}</div></div></div>
+<div class="cg">${GEO[S.country][S.city].map((c,i)=>`<article class="card" style="position:relative"><div class="cv" style="background:linear-gradient(to top,#09090c,transparent 80%),linear-gradient(135deg,${c.c[0]},${c.c[1]})"><span class="dist">📍 ${c.km}</span>${S.city=="Paris"&&i==S.st.fav?'<span class="mine">Votre cinéma</span>':""}<small>${c.f}</small><h2>${c.n}</h2><p>${c.a}</p></div>
+<div class="prog"><small style="font-size:9px;font-weight:700;letter-spacing:.13em">À L’AFFICHE AUJOURD’HUI</small>${c.cur.map(([k,ts])=>{const m=M[k];return`<div class="vm"><i style="${bg(m)}"></i><div><button data-a="mv" data-v="${m.id}"><strong>${m.t}</strong></button><small>${m.d} · ${m.g} · ${ageB(m)}</small><div class="mt">${ts.map(t=>`<button data-a="book" data-v="${m.id}" data-t="${t}" data-c="${esc(c.n)}" data-l="${esc(c.a)}">${t}</button>`).join("")}</div></div></div>`}).join("")}
+<div class="soon">📅<span><small style="color:#ff7897;font-size:9px;font-weight:700;letter-spacing:.1em">PROCHAINEMENT</small><strong>${c.up}</strong></span></div></div></article>`).join("")}</div>`}
+
+function tickets(){const T=S.tickets;return`
+<div class="hd"><div><p class="eb">VOS SÉANCES</p><h1>Mes billets</h1><span>Retrouvez uniquement vos réservations confirmées.</span></div><div class="pill">🎟 ${T.length} réservation${T.length>1?"s":""}</div></div>
+${T.length?T.map((t,i)=>{const m=M[t.m-1];return`<article class="rt"><i style="${bg(m)}"></i><div class="ri"><p>${m.g} · ${m.d}</p><h2>${m.t}</h2><div class="dt"><span><small>Date</small><strong>${t.date}</strong></span><span><small>Heure</small><strong>${t.time}</strong></span><span><small>Places</small><strong>${t.seats.join(", ")}</strong></span></div><div style="margin-top:20px;border-top:1px solid var(--l);padding-top:12px"><strong style="font-size:13px">📍 ${t.cin}</strong><br><small>${esc(t.loc||"1 boulevard Poissonnière, Paris")}</small></div>${t.ex.length?`<div class="ex">🍿 ${t.ex.join(" · ")}</div>`:""}</div>
+<div class="stub"><div class="qr">${qr(t.id)}</div><small>Présentez ce QR code</small><strong style="font-size:11px;letter-spacing:.12em">CG-${String(t.id).slice(-6)}</strong><button data-a="toast" data-v="Billet ajouté à votre portefeuille">Ajouter au wallet</button></div></article>`}).join(""):
+`<div class="empty"><div style="font-size:38px">🎟</div><h2>Aucun billet réservé</h2><small>Vos prochaines séances apparaîtront ici après votre réservation.</small><br><button class="btn" style="display:inline-block;margin-top:18px" data-a="nav" data-v="Explorer">Explorer les films</button></div>`}`}
+
+function profil(){const I=S.ins,PT=S.ptab;
+const imgs=PT=="Favoris"&&S.saved.length?S.saved.map(id=>M[id-1]).map((m,i)=>[bg(m),m.id]):Array.from({length:PT=="Films"?9:9},(_,i)=>[GR(i+(PT=="Films"?3:0)),i%3+1]);
+let panel="";if(I){panel=`<div class="ins"><div><div><p class="eb">BIBLIOTHÈQUE PERSONNELLE</p><h2>${I}</h2></div><button class="ib" data-a="ins" data-v="">✕</button></div>`+
+(I=="Films vus"?M.concat(M).map((m,i)=>`<button class="it" data-a="mv" data-v="${m.id}" style="width:100%"><i style="${bg(m)}"></i><span><strong>${m.t}</strong><small>Vu le ${12+i} nov. 2025</small></span><small style="color:#ffca5b">★ ${(4.2+i/10).toFixed(1).replace(".",",")}</small></button>`).join(""):
+I=="Critiques"?M.map((m,i)=>`<div class="it"><i style="${bg(m)}"></i><span><strong>${m.t} <small style="color:#ffca5b">★ ${m.r}</small></strong><small>${["Une mise en scène magnétique et un dernier acte qui reste longtemps en tête.","Une nuit électrique, portée par deux interprètes absolument justes.","Délicat et contemplatif, avec une photographie à couper le souffle."][i]}</small><br><small style="font-size:10px">Il y a ${i+2} semaine${i?"s":""} · 24 J’aime</small></span></div>`).join(""):
+[...M[0].cast,...M[1].cast].map((c,i)=>`<div class="it"><i data-a="pp" data-v="${slug(c[0])}" class="av">${ini(c[0])}</i><span data-a="pp" data-v="${slug(c[0])}"><strong>${c[0]}</strong><small>${PE[slug(c[0])].h} · ${PE[slug(c[0])].f} k abonnés</small></span><button class="fl ${S.fol["f"+i]?"on":""}" data-a="fol" data-v="f${i}">${S.fol["f"+i]?"Abonné(e)":I=="Abonnements"?"Abonné(e)":"Suivre"}</button></div>`).join(""))+"</div>"}
+return`<div class="prof"><div class="pcv" style="${coverStyle(S.me.cover)}"><button class="ib gear" data-a="set" aria-label="Paramètres">⚙</button></div><div class="pm"><div class="pid">${meI()}<div><h1>${esc(S.me.n)}${S.st.priv?" 🔒":""}</h1><small>@${esc(S.me.h)} · ${esc(S.me.city)}${S.me.tag?" · "+esc(S.me.tag):""}</small></div><button class="pill" data-a="edit">Modifier le profil</button><button class="pill" data-a="shp" aria-label="Partager mon profil">${IC.share} Partager le profil</button></div>
+<p style="margin-top:16px;max-width:560px;line-height:1.6;color:#c4c2c8;font-size:13px">${esc(S.me.bio)}</p><div class="tags">#cinéma #paris #sciencefiction</div>
+<div class="stats">${[["128","Films vus"],["42","Critiques"],["3,8 k","Abonnés"],["286","Abonnements"]].map(([v,l])=>`<button class="${I==l?"on":""}" data-a="ins" data-v="${I==l?"":l}"><strong>${v}</strong><small>${l}</small></button>`).join("")}</div>${panel}
+<div class="tabs" style="grid-template-columns:repeat(4,1fr)">${[["Publications",IC.grid],["Reels",IC.play],["Films",IC.film],["Favoris",IC.bookmark]].map(([l,i])=>`<button class="${PT==l?"on":""}" data-a="ptab" data-v="${l}">${i} ${l}</button>`).join("")}</div>
+${PT=="Reels"?reelGrid("me"):""}<div class="pg" style="${PT=="Reels"?"display:none":""}">${imgs.map((g,i)=>`<button style="${g[0]}" data-a="mv" data-v="${g[1]}">♥ ${8+i*2},${i} k</button>`).join("")}</div></div></div>`}
+
+function modals(){let h="";const m=S.mv;
+if(m&&!S.book){h+=`<div class="bd" data-a="close"><section class="md" data-stop><button class="x" data-a="close">✕</button><div class="dh" style="${bg(m)}"><p>${m.g} · ${m.d}</p><h2>${m.t}</h2><em>${m.tag}</em><div class="meta"><span style="color:#ffcb5c">★ ${m.r}</span>${ageB(m)}<span>${m.y}</span></div></div><div class="dc"><p>${m.desc}</p><h3 style="margin-top:22px;font-size:15px">Distribution</h3><div class="cast">${m.cast.map(c=>`<div data-a="pp" data-v="${slug(c[0])}"><i class="av">${ini(c[0])}</i><strong>${c[0]}</strong><small>${c[1]}</small></div>`).join("")}</div><button class="btn w" data-a="book" data-v="${m.id}">🎟 Choisir une séance</button></div></section></div>`}
+if(S.book&&m){const st=S.step,n=S.seats.length,d=D[S.di],slots=TIMES.includes(S.time)?TIMES:[S.time,...TIMES];let b="";
+if(st==1)b=`<h3>Quand souhaitez-vous venir ?</h3><p class="sub">${esc(S.bcin)} · Salle Infinite</p><div class="dp">${D.map((x,i)=>`<button class="${S.di==i?"on":""}" data-a="di" data-v="${i}"><small>${x.day}</small><strong>${x.n}</strong><small>${x.mo}</small></button>`).join("")}</div><p style="margin-top:22px;font-weight:700">🕘 Horaires disponibles <small style="float:right">VF · IMAX</small></p><div class="tp">${slots.map((t,i)=>`<button class="${S.time==t?"on":""}" data-a="time" data-v="${t}"><strong>${t}</strong><small style="color:${t=="20:30"?"#d78c4e":"#6f9d78"}">${t=="20:30"?"Presque complet":"Disponible"}</small></button>`).join("")}</div><button class="btn w" data-a="step" data-v="2">Choisir mes places ›</button>`;
+if(st==2)b=`<div style="display:flex;justify-content:space-between"><div><h3>Choisissez vos places</h3><p class="sub">Jusqu’à 6 places par réservation</p></div><span class="fl">${n} place${n>1?"s":""}</span></div><div class="scr"></div><div class="sm">${"ABCDEFG".split("").map((r,ri)=>`<div class="sr"><span>${r}</span>${Array.from({length:12},(_,i)=>{const s=r+(i+1),pmr=r=="G"&&[0,1,10,11].includes(i),un=ri==2&&[3,4,8].includes(i)||ri==4&&[1,9].includes(i);return`<button ${un?"disabled":""} class="${S.seats.includes(s)?"on":""} ${pmr?"pm2":""}" data-a="seat" data-v="${s}" aria-label="Place ${s}${pmr?" accessible PMR":""}">${pmr?IC.pmr:""}</button>`}).join("")}<span>${r}</span></div>`).join("")}</div>
+<div class="lg"><span><i></i>Disponible</span><span><i style="background:var(--a)"></i>Sélectionnée</span><span><i style="opacity:.2"></i>Occupée</span><span><i style="background:#3b8bbe30;border:1.5px solid #5aa8d6;color:#7cc8f5;width:20px;height:20px;display:inline-grid;place-items:center;vertical-align:-5px;border-radius:5px">${IC.pmr}</i>Place PMR</span></div>
+<div class="tar"><p>TARIFS</p>${S.seats.map(s=>{const t=tierOf(s),p=isPmr(s),hp=S.seats.some(isPmr);return`<div class="tr2"><strong>${p?`<span class="pi">${IC.pmr}</span>`:""}Place ${s}</strong><div class="tt">${Object.entries(TAR).map(([k,[nm,pr,sh]])=>`<button class="${t==k?"on":""}" ${k=="pmr"&&!p||k=="acc"&&!hp?"disabled":""} data-a="tier" data-v="${s}:${k}" title="${nm}">${sh}<small>${eur(pr)}</small></button>`).join("")}</div></div>`}).join("")}<small style="display:block;margin-top:10px;font-size:11px">Tarifs PMR et enfant : exemples · Frais de réservation 1,50 € par place</small></div>
+<div class="sumb"><span><small>${S.seats.join(", ")||"Aucune place"}</small><strong>${eur(seatsTotal())}</strong></span><button class="btn" ${n?"":"disabled"} data-a="step" data-v="3">Continuer ›</button></div>`;
+if(st==3)b=`<div style="display:flex;justify-content:space-between"><div><h3>Un petit plaisir ?</h3><p class="sub">Précommandez et récupérez votre commande sans attendre.</p></div><small>Optionnel</small></div><div class="tg">${TR.map(([id,nm,dt,p,ic,bd,ex])=>`<article class="${S.tr[id]?"on":""}">${bd?`<span class="tbd">${bd}</span>`:""}<div class="ti">${ic}</div><div class="tt2"><strong>${nm}</strong><small>${dt}</small><em class="tex">${ex}</em><b>${eur(p)}</b></div><div class="qp"><button ${S.tr[id]?"":"disabled"} data-a="tr" data-v="${id}:-1">−</button><strong>${S.tr[id]||0}</strong><button data-a="tr" data-v="${id}:1">+</button></div></article>`).join("")}</div><div class="note"><strong>Retrait express</strong> · Votre commande sera prête 10 minutes avant la séance.</div>
+<div class="sumb"><span><small>${trTot()?Object.values(S.tr).reduce((a,b)=>a+b,0)+" produit(s)":"Aucun extra sélectionné"}</small><strong>${eur(total())}</strong></span><button class="btn" data-a="step" data-v="4">Continuer ›</button></div>`;
+if(st==4)b=`<h3>Vérifiez votre réservation</h3><div class="ts"><i style="${bg(m)}"></i><div><small style="color:var(--a2);font-size:9px;font-weight:700;letter-spacing:.1em">AVANT-PREMIÈRE</small><h4>${m.t}</h4><p>📅 ${d.day} ${d.long}, ${S.time}</p><p>📍 ${esc(S.bcin)} · Salle Infinite</p><p>🎟 Rang ${S.seats[0]?.[0]} · Places ${S.seats.map(s=>s.slice(1)).join(", ")}</p></div></div>
+<div class="pl">${Object.entries(grp()).map(([k,c])=>`<span>${c} × ${TAR[k][0]}<b>${eur(c*TAR[k][1])}</b></span>`).join("")}<span>Frais de réservation<b>${eur(n*1.5)}</b></span>${trTot()?`<span>Petits plaisirs<b>${eur(trTot())}</b></span>`:""}<span class="tot">Total<b>${eur(total())}</b></span></div>
+<p style="margin-top:18px;font-size:12px;font-weight:700">Carte bancaire</p><div class="cf" style="margin-top:8px"><input value="4242 4242 4242 4242" aria-label="Numéro de carte"><input placeholder="MM/AA"><input placeholder="CVC"></div><button class="btn w" data-a="pay">Payer ${eur(total())}</button><p style="text-align:center;margin-top:10px"><small style="font-size:10px">Paiement sécurisé · Annulation gratuite jusqu’à 2h avant la séance</small></p>`;
+if(st==5)b=`<div class="ok"><div class="ck">✓</div><p style="margin-top:24px;color:#55d58a;font-size:10px;font-weight:700;letter-spacing:.14em">RÉSERVATION CONFIRMÉE</p><h3>Vos places sont réservées !</h3><div class="tk"><small>${m.t}</small><strong>${S.seats.join(" · ")}</strong><small>${d.day} ${d.long} · ${S.time}</small></div><p style="margin:18px 0 0"><small>Vos billets ont été ajoutés à l’onglet « Mes billets ».</small></p><button class="btn w" style="max-width:380px" data-a="done">Voir mes billets</button></div>`;
+h+=`<div class="bd"><section class="md" style="width:min(680px,100%)"><div class="bh"><button class="b" data-a="back">${st>1&&st<5?"‹":"✕"}</button><div><p>RÉSERVATION</p><h2>${m.t}</h2></div><small>${st<5?st+"/4":""}</small></div>${st<5?`<div class="stp">${[1,2,3,4].map(i=>`<i class="${i<=st?"on":""}"></i>`).join("")}</div>`:""}<div class="${st==5?"":"bc"}">${b}</div></section></div>`}
+if(S.cm){const m=M[S.cm-1],L=COM[S.cm];h+=`<div class="bd" data-a="cmclose"><section class="md" data-stop style="width:min(740px,100%)"><div class="bh"><button class="b" data-a="cmclose">✕</button><div><p>COMMENTAIRES</p><h2>${m.t}</h2></div><small>${183+L.length}</small></div><div style="max-height:60vh;min-height:220px;overflow-y:auto">${L.map((c,i)=>`<div class="cmt"><i data-a="pp" data-v="${c.u}" class="av">${ini(c.u.replace(/[._]/g," ").replace(/^./,x=>x.toUpperCase()))}</i><span><b data-a="pp" data-v="${c.u}">${c.u}</b>${c.t}<small>${c.w}${c.n?" · "+c.n+" J’aime":""}</small></span><button class="${c.l?"lk":""}" data-a="cmlike" data-v="${S.cm}:${i}" aria-label="J’aime ce commentaire">${IC.heart}</button></div>`).join("")}</div><div class="cmi">${meI()}<input id="cmi" placeholder="Ajouter un commentaire…" autocomplete="off"><button class="btn" id="cmsend" data-a="cmsend">Publier</button></div></section></div>`}
+if(S.rep){const m=M[S.rep.id-1],R=[["Contenu inapproprié","Choquant, sexuel ou dérangeant"],["Spoiler non signalé","Révèle l’intrigue sans avertissement"],["Spam ou publicité","Contenu répétitif ou promotionnel"],["Fausse information","Informations fausses ou trompeuses"],["Violence ou danger","Incite à la violence ou à des actes dangereux"],["Harcèlement ou haine","Propos haineux, insultes, intimidation"],["Autre","Un autre problème avec ce post"]];
+h+=`<div class="bd" data-a="rpclose"><section class="md" data-stop style="width:min(480px,100%)"><div class="bh"><button class="b" data-a="rpclose">✕</button><div><p>SIGNALEMENT</p><h2>${S.rep.sent?"Merci !":"Signaler ce post"}</h2></div><span></span></div>`+(S.rep.sent?`<div class="ok" style="padding:36px 28px"><div class="ck">✓</div><h3 style="margin-top:18px">Signalement envoyé</h3><p style="margin:8px 0 18px;color:var(--m);font-size:13px">Notre équipe va examiner « ${esc(S.rep.r)} » sur le post de ${esc(m.st)}.</p><button class="pill" data-a="hide" data-v="${m.id}">Masquer ce post</button><button class="btn w" data-a="rpclose">Terminer</button></div>`:`<p class="wn" style="padding-top:16px">Pourquoi signalez-vous le post de <b style="color:#fff">${esc(m.st)}</b> ?</p><div class="wl">${R.map(([t,d])=>`<button class="rpo ${S.rep.r==t?"on":""}" data-a="rpsel" data-v="${t}"><span class="rd"></span><span><strong>${t}</strong><small>${d}</small></span></button>`).join("")}</div><div class="cmi" style="justify-content:flex-end"><button class="pill" data-a="rpclose">Annuler</button><button class="btn" data-a="rpsend">Envoyer le signalement</button></div>`)+`</section></div>`}
+if(S.age){const m=M[S.age-1],w=WARN[m.id],a=parseInt(m.age);h+=`<div class="bd" data-a="aclose"><section class="md" data-stop style="width:min(480px,100%)"><button class="x" data-a="aclose">✕</button><div class="ah2"><span class="ag a${a}">${m.age}</span><div><p>CLASSIFICATION</p><h2>${m.t}</h2><small>Déconseillé aux moins de ${a} ans</small></div></div><div class="sh2">POURQUOI CETTE CLASSIFICATION ?</div><div class="wl">${w.map(([ic,t,d])=>`<div class="wi"><span>${ic}</span><span><strong>${t}</strong><small>${d}</small></span></div>`).join("")}</div><p class="wn" style="padding-top:14px">Informations indicatives. La classification officielle fait foi.</p><div class="cmi" style="justify-content:flex-end"><button class="btn" data-a="aclose">J’ai compris</button></div></section></div>`}
+if(S.share){const x=S.share;h+=`<div class="bd" data-a="shclose"><section class="md" data-stop style="width:min(460px,100%)"><div class="bh"><button class="b" data-a="shclose">✕</button><div><p>PARTAGER</p><h2>${esc(x.t)}</h2></div><span></span></div><div style="padding:22px 26px 4px;display:flex;gap:14px;align-items:center">${x.av}<div><strong>${esc(x.n)}</strong><br><small>${esc(x.s)}</small></div></div><div class="lkb"><span class="lkt">${esc(x.u)}</span><button class="btn" data-a="copy">${IC.link} Copier le lien</button></div><p class="wn">Toute personne qui a ce lien peut ouvrir ${x.d}.</p></section></div>`}
+if(S.rl){const L=reelsOf(S.rl.k),r=L[S.rl.i],own=S.rl.k=="me",po=own?null:PE[S.rl.k],nm=own?S.me.n:po.n,hd=own?"@"+S.me.h:po.h,el=S.rpause?S.rl.el:(Date.now()-S.rl.st)/1000,lk=S.rlk[r.id];
+h+=`<div class="rv" data-a="rclose"><div class="rph" data-stop><div class="rbg" style="${bg(r.m)}"></div><div class="rsh"></div>
+<div class="rbars">${L.map((_,i)=>`<i>${i<S.rl.i?'<b style="width:100%"></b>':i==S.rl.i?`<b class="rbar" style="animation-delay:-${Math.max(0,el).toFixed(2)}s;animation-play-state:${S.rpause?"paused":"running"}"></b>`:""}</i>`).join("")}</div>
+<div class="rtop"><span class="rwho">${own?meI("width:36px;height:36px;font-size:12px"):`<i class="av" ${pa(po)}>${esc(ini(nm))}</i>`}<span><strong>${esc(nm)}</strong><small>${esc(hd)}</small></span></span><button class="x2" data-a="rclose" aria-label="Fermer">${IC.x}</button></div>
+<button class="rz rl2" data-a="rprev" aria-label="Précédent"></button><button class="rz rm2" data-a="rpause" aria-label="Pause"></button><button class="rz rr2" data-a="rnext" aria-label="Suivant"></button>
+${S.rpause?`<div class="rpz">${IC.play}</div>`:""}
+<div class="rtxt"><small>${r.m.t}</small><h2>${esc(r.t)}</h2><p>${esc(r.c)}</p></div>
+<div class="rside"><button class="${lk?"lk":""}" data-a="rlike" data-v="${r.id}" aria-label="J’aime">${IC.heart}<small>${lk?"1":"0"}</small></button><button data-a="rmute" aria-label="Son">${S.rmute?IC.mute:IC.vol}</button></div></div></div>`}
+if(S.edit){const d=S.dr;h+=`<div class="bd" data-a="eclose"><section class="md" data-stop style="width:min(560px,100%)"><div class="bh"><button class="b" data-a="eclose">✕</button><div><p>PROFIL</p><h2>${S.edit=="new"?"Créer un profil":"Modifier le profil"}</h2></div><span></span></div>
+<div style="display:flex;gap:18px;align-items:center;padding:22px 26px 12px">${meI("width:92px;height:92px;font-size:32px;flex:none",d)}<div><label class="btn" style="display:inline-block;cursor:pointer;padding:10px 16px">📷 Importer une photo<input id="pf" type="file" accept="image/*" hidden></label>${d.photo?'<button class="pill" style="margin-left:8px" data-a="rmphoto">Retirer</button>':""}<p style="margin-top:8px"><small style="font-size:12px">Ou choisissez un avatar :</small></p></div></div>
+<div class="avs"><button class="${d.av<0&&!d.photo?"on":""}" style="background:#2a2a32;font-size:13px;font-weight:700" data-a="av" data-v="-1">${esc(ini(d.n||"?"))}</button>${AVS.map((a,i)=>`<button class="${d.av==i&&!d.photo?"on":""}" style="background:${a[1]}" data-a="av" data-v="${i}">${a[0]}</button>`).join("")}</div>
+<div style="padding:18px 26px 0"><p style="font-size:12px;font-weight:700;margin-bottom:8px">Fond du profil</p><div class="cvp" style="${coverStyle(d.cover)}"></div><div style="display:flex;gap:8px;margin:10px 0;flex-wrap:wrap"><label class="pill" style="cursor:pointer">🖼 Importer une image<input id="cf" type="file" accept="image/*" hidden></label>${d.cover?'<button class="pill" data-a="crm">Par défaut</button>':""}</div><small style="font-size:12px">Ou choisissez une publication :</small><div class="ths">${Array.from({length:9},(_,i)=>`<button class="${d.cover&&d.cover.p===i?"on":""}" style="${coverStyle({p:i})}" data-a="cpost" data-v="${i}" aria-label="Publication ${i+1}"></button>`).join("")}</div></div>
+<div class="ef"><label>Nom<input data-f="n" value="${esc(d.n)}" maxlength="40"></label><label>Identifiant<input data-f="h" value="${esc(d.h)}" maxlength="24"></label><label>Ville<input data-f="city" value="${esc(d.city)}" maxlength="40"></label><label>Titre<input data-f="tag" value="${esc(d.tag)}" maxlength="40"></label><label>Bio <small id="cnt" style="font-weight:400;float:right">${d.bio.length}/160</small><textarea data-f="bio" maxlength="160">${esc(d.bio)}</textarea></label></div>
+<div class="cmi" style="justify-content:flex-end"><button class="pill" data-a="eclose">Annuler</button><button class="btn" data-a="esave">${S.edit=="new"?"Créer le profil":"Enregistrer"}</button></div></section></div>`}
+if(S.set){const on=k=>k=="snd"?S.snd:S.st[k],T=(k,l,d)=>`<div class="sg"><span><strong>${l}</strong><small>${d}</small></span><button class="tgl ${on(k)?"on":""}" data-a="tg" data-v="${k}" role="switch" aria-checked="${!!on(k)}" aria-label="${l}"></button></div>`;
+h+=`<div class="bd" data-a="sclose2"><section class="md" data-stop style="width:min(560px,100%)"><div class="bh"><button class="b" data-a="sclose2">✕</button><div><p>PARAMÈTRES</p><h2>Réglages</h2></div><span></span></div>
+<div class="sh2">NOTIFICATIONS</div>${T("n1","Nouvelles séances","Dans votre cinéma favori")}${T("n2","Réponses aux commentaires","Quand quelqu’un vous répond")}${T("n3","Messages privés","Nouveaux messages reçus")}
+<div class="sh2">CONFIDENTIALITÉ</div>${T("priv","Compte privé","Un cadenas 🔒 apparaît sur votre profil")}
+<div class="sh2">EXPÉRIENCE</div>${T("snd","Sons de l’interface","Petits sons au clic")}<div class="sg"><span><strong>Cinéma favori</strong><small>Affiché « Votre cinéma » dans Cinémas</small></span><div class="seg">${["Grand Rex","UGC Halles","MK2 Biblio"].map((n,i)=>`<button class="${S.st.fav==i?"on":""}" data-a="fav" data-v="${i}">${n}</button>`).join("")}</div></div>
+<div class="cmi" style="justify-content:space-between"><button class="pill" data-a="reset">Réinitialiser le profil</button><button class="btn" data-a="sclose2">Terminer</button></div></section></div>`}
+if(S.search)h+=`<div class="so"><div class="sd2">🔍<input id="q" autofocus placeholder="Rechercher sur Cinégram" autocomplete="off"><button class="ib" data-a="sclose">✕</button></div><div id="sres"></div></div>`;
+$("#ov").innerHTML=h;if(S.search){sres("");$("#q").focus()}if(S.cm&&$("#cmi"))$("#cmi").focus()}
+function sres(q){$("#sres").innerHTML=`<p>${q?"RÉSULTATS":"RECHERCHES POPULAIRES"}</p>`+M.filter(m=>m.t.toLowerCase().includes(q.toLowerCase())).map(m=>`<button data-a="sopen" data-v="${m.id}"><i style="${bg(m)}"></i><span><strong>${m.t}</strong><small>${m.g} · ${m.d}</small></span></button>`).join("")}
+
+function other(){const p=PE[S.pp],f=S.fol["p"+p.k];return`<button class="pill" data-a="ppback" style="margin-bottom:14px">‹ Retour</button><div class="prof"><div class="pcv" style="${GR(p.k.length)}"></div><div class="pm"><div class="pid"><i class="av" ${pa(p)}>${ini(p.n)}</i><div><h1>${p.n}</h1><small>${p.h} · ${p.role}</small></div><button class="pill" data-a="fol" data-v="p${p.k}">${f?"✓ Abonné(e)":"Suivre"}</button><button class="pill" data-a="dm" data-v="${p.k}">${IC.msg} Message</button><button class="pill" data-a="shpo" data-v="${p.k}">${IC.share} Partager</button></div><p style="margin-top:16px;max-width:560px;line-height:1.6;color:#c4c2c8;font-size:13px">${p.bio}</p><div class="stats" style="grid-template-columns:repeat(3,1fr)"><button style="cursor:default"><strong>${p.k.length*3+9}</strong><small>Publications</small></button><button style="cursor:default"><strong>${p.f} k</strong><small>Abonnés</small></button><button style="cursor:default"><strong>${p.k.length*7+40}</strong><small>Films vus</small></button></div><div class="tabs" style="grid-template-columns:repeat(2,1fr)">${[["Publications",IC.grid],["Reels",IC.play]].map(([l,i])=>`<button class="${(S.ptab=="Reels"?"Reels":"Publications")==l?"on":""}" data-a="ptab" data-v="${l}">${i} ${l}</button>`).join("")}</div>${S.ptab=="Reels"?reelGrid(p.k):""}<div class="pg" style="${S.ptab=="Reels"?"display:none":""}">${Array.from({length:9},(_,i)=>`<button style="${GR(i+p.k.length)}" data-a="mv" data-v="${i%3+1}">♥ ${5+i*2},${i} k</button>`).join("")}</div></div></div>`}
+function msgs(){const keys=Object.keys(CV),cur=S.chat&&CV[S.chat]?S.chat:null,p=cur&&PE[cur];return`<div class="hd"><div><p class="eb">MESSAGERIE</p><h1>Messages</h1><span>Vos conversations privées.</span></div></div><div class="ms ${cur?"open":""}"><div class="ml">${keys.map(k=>{const q=PE[k],l=CV[k].slice(-1)[0]||{t:"Nouvelle conversation"};return`<button class="${k==cur?"on":""}" data-a="chat" data-v="${k}"><i class="av" ${pa(q)}>${ini(q.n)}</i><span><strong>${q.n}</strong><small>${l.me?"Vous : ":""}${l.t}</small></span></button>`}).join("")}</div><div class="mc">${cur?`<div class="mh"><button class="back" data-a="chat" data-v="">‹</button><i class="av" data-a="pp" data-v="${cur}" ${pa(p)}>${ini(p.n)}</i><span data-a="pp" data-v="${cur}"><strong>${p.n}</strong><small>${p.h}</small></span></div><div class="mb" id="mb">${CV[cur].map(m=>`<div class="bub ${m.me?"me":""}">${m.t}<small>${m.w}</small></div>`).join("")||'<small style="margin:auto">Écrivez le premier message.</small>'}</div><div class="cmi"><input id="mi" placeholder="Écrire un message…" autocomplete="off"><button class="btn" id="msend" data-a="msend">Envoyer</button></div>`:`<div class="empty" style="border:0;margin:auto;background:none"><div style="font-size:34px">✉</div><h2>Vos messages</h2><small>${keys.length?"Sélectionnez une conversation.":"Vous n’avez pas encore de discussion. Ouvrez un profil et touchez « Message » pour écrire à un ami."}</small></div>`}</div></div>`}
+const RL=[["Bande-annonce décryptée","Les détails que vous avez peut-être manqués"],["Coulisses du tournage","Ce qu’on ne voit jamais à l’écran"],["Ma réaction à chaud","Sortie de salle, 30 secondes"],["Top 3 du mois","Mes coups de cœur du moment"],["Playlist du film","La bande-son en boucle"],["Questions-réponses","Vos questions, mes réponses"]];
+const reelsOf=k=>{const o=[...k].reduce((a,c)=>a+c.charCodeAt(0),0);return Array.from({length:6},(_,i)=>{const r=RL[(o+i)%6],m=M[(o+i)%3];return{id:k+":"+i,t:r[0],c:r[1],m,v:((o*7+i*13)%90+8)+","+((i+2)%10)+" k"}})};
+const reelGrid=k=>`<div class="rg">${reelsOf(k).map((r,i)=>`<button class="rc" style="${bg(r.m)}" data-a="reel" data-v="${k}|${i}"><span class="rpb">${IC.film}</span><strong>${r.t}</strong><small>${IC.play} ${r.v}</small></button>`).join("")}</div>`;
+const rgo=d=>{const n=reelsOf(S.rl.k).length,i=S.rl.i+d;if(i>=n){S.rl=null;S.rpause=false;return}S.rl.i=Math.max(0,i);S.rl.st=Date.now();S.rl.el=0;S.rpause=false};
+const WARN={1:[["⚔️","Violence","Scènes de combat et de guerre, sans excès de sang"],["😨","Scènes intenses","Passages sombres et menaçants qui peuvent impressionner les plus jeunes"]],
+2:[["🔞","Nudité et sexualité","Scènes brèves de nudité et de sexualité"],["🚬","Tabac et alcool","Consommation fréquente à l’écran"],["😰","Thèmes sensibles","Bombe atomique, guerre, tensions politiques"]],
+3:[["🩸","Violence graphique","Scènes de gore et de transformation corporelle"],["🔞","Nudité","Scènes de nudité fréquentes"],["😱","Horreur","Images choquantes, déconseillées aux personnes sensibles"]]};
+const ageB=m=>`<button class="age a${parseInt(m.age)}" data-a="age" data-v="${m.id}" title="Pourquoi cette classification ?">${m.age}</button>`;
+const postMenu=m=>`<div class="gmenu pmn"><button data-a="pp" data-v="${slug(m.st)}">${IC.user} Voir le profil de ${m.st}</button><button data-a="more" data-v="${m.id}:more">${IC.plus} Voir plus de contenus comme celui-ci</button><button data-a="more" data-v="${m.id}:less">${IC.minus} Voir moins de contenus comme celui-ci</button><button data-a="shareP" data-v="${m.id}">${IC.link} Copier le lien du post</button><button data-a="hide" data-v="${m.id}">${IC.eyeoff} Masquer ce post</button><button class="dg" data-a="rep" data-v="${m.id}">${IC.flag} Signaler…</button></div>`;
+const doCopy=t=>{const fb=()=>{const a=document.createElement("textarea");a.value=t;a.style.cssText="position:fixed;opacity:0";document.body.appendChild(a);a.select();let ok=false;try{ok=document.execCommand("copy")}catch(_){}a.remove();toast(ok?"Lien copié : "+t:"Copie impossible ici : sélectionnez le lien et copiez-le")};try{navigator.clipboard.writeText(t).then(()=>toast("Lien copié : "+t),fb)}catch(_){fb()}};
+const vis=()=>S.nt.filter(n=>n.k=="t"||S.st["n"+({s:1,r:2,m:3}[n.k])]);
+const sync=()=>{S.profs[S.cur]={me:S.me,tickets:S.tickets,liked:S.liked,saved:S.saved,nt:S.nt,cv:CV,fol:S.fol,st:S.st,hid:S.hid}};
+const load=i=>{const p=S.profs[i];S.cur=i;S.me=p.me;S.tickets=p.tickets;S.liked=p.liked;S.saved=p.saved;S.nt=p.nt;CV=p.cv;S.fol=p.fol;S.st=p.st;S.hid=p.hid;S.nav="Accueil";S.pp=null;S.chat=null;S.ins=null;S.mv=null;S.cm=null;S.book=false;S.ptab="Publications";S.gm=null;S.sf=false;S.q=""};
+const bellInner=()=>{const V=vis(),U=V.filter(n=>!n.read).length;return`<button class="ib" data-a="gopen" data-v="notif" aria-label="Notifications">${IC.bell}</button>${U?`<span class="bdg">${U}</span>`:""}${S.gm=="notif"?`<div class="gmenu nt"><div class="nh"><strong>Notifications</strong>${U?'<button data-a="ntall">Tout marquer comme lu</button>':""}</div><div class="lst">${V.length?V.map(n=>`<button class="ni2 ${n.read?"":"un"}" data-a="ntgo" data-v="${n.id}"><span class="ico">${{s:"🎬",r:"💬",m:"✉️",t:"🎟"}[n.k]}</span><span>${n.t}<small>${n.w}</small></span></button>`).join(""):'<p class="ne">Aucune notification</p>'}</div></div>`:""}`};
+const updBell=()=>{const b=$("#bellw");if(b&&S.gm!="notif")b.innerHTML=bellInner()};
+const acct=()=>`<div class="gmenu acct"><div class="ah">${meI("width:44px;height:44px;flex:none")}<span><strong>${esc(S.me.n)}</strong><small>@${esc(S.me.h)}</small></span></div>${S.profs.some((p,i)=>p&&i!=S.cur)?`<div class="sh2" style="padding:10px 14px 4px">CHANGER DE PROFIL</div>`+S.profs.map((p,i)=>p&&i!=S.cur?`<button class="pr" data-a="swp" data-v="${i}">${meI("width:30px;height:30px;font-size:11px;flex:none",p.me)}<span>${esc(p.me.n)}</span></button>`:"").join(""):""}<button data-a="newp">${IC.addu} Créer un nouveau profil</button><button class="dg" data-a="logout">${IC.out} Se déconnecter</button></div>`;
+function login(){const ps=S.profs.map((p,i)=>p?`<button class="lp" data-a="login" data-v="${i}">${meI("width:92px;height:92px;font-size:30px",p.me)}<strong>${esc(p.me.n)}</strong><small>@${esc(p.me.h)}</small></button>`:"").join("");return`<div class="lg2"><div class="brand" style="justify-content:center;margin-bottom:34px"><span class="bm">▶</span>CINÉGRAM</div><h1>Qui regarde ?</h1><p>Choisissez un profil pour continuer.</p><div class="lps">${ps}<button class="lp" data-a="newp"><i class="av" style="width:92px;height:92px;font-size:38px;background:#1d1d24">＋</i><strong>Nouveau profil</strong><small>Créer un compte</small></button></div></div>`}
+function resHTML(q){const nz=s=>s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,""),k=nz(q.trim());
+const mv=M.filter(m=>!k||[m.t,m.g,m.dir].some(x=>nz(x).includes(k)));
+const pe=k?Object.values(PE).filter(p=>nz(p.n).includes(k)||p.h.includes(k)).slice(0,5):[];
+const ci=[];if(k)for(const[c,cs]of Object.entries(GEO))for(const[v,l]of Object.entries(cs))l.forEach(x=>{if([x.n,v,c].some(y=>nz(y).includes(k)))ci.push([x,c,v])});
+const sec=(t,a)=>a.length?`<p>${t}</p>${a.join("")}`:"";
+const h=sec(k?"FILMS":"RECHERCHES POPULAIRES",mv.map(m=>`<button data-a="sopen" data-v="${m.id}"><i style="${bg(m)}"></i><span><strong>${m.t}</strong><small>${m.g} · ${m.d}</small></span></button>`))
++sec("PERSONNES",pe.map(p=>`<button data-a="pp" data-v="${p.k}"><i class="av" ${pa(p)}>${esc(ini(p.n))}</i><span><strong>${esc(p.n)}</strong><small>${p.h} · ${esc(p.role)}</small></span></button>`))
++sec("CINÉMAS",ci.slice(0,6).map(([x,c,v])=>`<button data-a="scin" data-v="${c}|${v}"><i style="background:linear-gradient(135deg,${x.c[0]},#14141b)">🏛</i><span><strong>${esc(x.n)}</strong><small>${v}, ${c}</small></span></button>`));
+return h||`<p>Aucun résultat pour « ${esc(q.trim())} »</p>`}
+function render(){const fq=document.activeElement&&document.activeElement.id=="tq"?document.activeElement.selectionStart:null;if(S.out){$("#app").innerHTML=login();modals();return}const V=S.pp&&PE[S.pp]?other:{Accueil:home,Explorer:explore,Cinémas:cinemas,"Mes billets":tickets,Profil:profil,Messages:msgs}[S.nav];
+$("#app").innerHTML=`<aside class="side"><button class="brand" data-a="nav" data-v="Accueil"><span class="bm">▶</span><span class="bt">${[..."CINÉGRAM"].map((c,i)=>`<span style="--i:${i}">${c}</span>`).join("")}</span></button><nav class="nav">${NAV.map(([l,i])=>`<button class="ni ${S.nav==l?"on":""}" data-a="nav" data-v="${l}"><span>${i}</span><span class="lb">${l}</span>${l=="Mes billets"&&S.tickets.length?`<span class="cnt">${S.tickets.length}</span>`:""}</button>`).join("")}</nav>
+<div class="prem"><p>● Séance événement</p><strong>Dune : Deuxième partie</strong><small>Ce soir, 20:30</small><button data-a="book" data-v="1">Réserver</button></div>
+<div class="foot"><button class="row" style="margin:0;flex:1" data-a="nav" data-v="Profil">${meI()}<span><strong>${esc(S.me.n)}</strong><small>@${esc(S.me.h)}</small></span></button><button class="ib snd ${S.snd?"":"off"}" data-a="snd" aria-pressed="${S.snd}" aria-label="${S.snd?"Désactiver les sons":"Activer les sons"}" title="${S.snd?"Désactiver les sons":"Activer les sons"}">${S.snd?IC.vol:IC.mute}</button></div></aside>
+<main><header class="top"><div class="sbw"><div class="sb">${IC.search}<input id="tq" type="text" autocomplete="off" placeholder="Rechercher un film, un acteur, un cinéma..." value="${esc(S.q)}"></div><div class="tres" id="tres">${S.sf?resHTML(S.q):""}</div></div><div><button class="ib h" data-a="nav" data-v="Messages" aria-label="Messages">${IC.msg}</button><div class="gm" id="bellw">${bellInner()}</div><div class="gm"><button class="ib" data-a="gopen" data-v="acct" aria-label="Compte">${meI("width:34px;height:34px")}</button>${S.gm=="acct"?acct():""}</div></div></header>
+<div class="wrap" key="${S.nav}">${V()}</div></main>
+<nav class="mn">${NAV.map(([l,i])=>`<button class="${S.nav==l?"on":""}" data-a="nav" data-v="${l}"><span>${i}</span>${l=="Mes billets"?"Billets":l}</button>`).join("")}</nav>`;modals();const mb=$("#mb");if(mb){mb.scrollTop=1e9;if(!S.search&&!S.cm&&fq===null&&$("#mi"))$("#mi").focus()}if(fq!==null){const t=$("#tq");if(t){t.focus();t.setSelectionRange(fq,fq)}}}
+
+document.addEventListener("click",e=>{if(S.sf&&!e.target.closest(".sbw")){S.sf=false;const t=$("#tres");if(t)t.innerHTML=""}if(S.gm&&!e.target.closest(".gm")){S.gm=null;render()}const el=e.target.closest("[data-a]");if(e.target.closest("[data-stop]")&&!el)return;if(e.target.closest("button"))beep(e.target.closest(".btn"));
+if(!el)return;if((el.classList.contains("bd")||el.classList.contains("rv"))&&e.target!==el)return;
+const a=el.dataset.a,v=el.dataset.v;
+const f={nav:()=>{S.nav=v;S.ins=null;S.mv=null;S.pp=null;S.cm=null;scrollTo(0,0)},mv:()=>S.mv=M[v-1],close:()=>S.mv=null,
+book:()=>{S.mv=M[v-1];S.book=true;S.step=1;S.tr={};S.tier={};if(el.dataset.t)S.time=el.dataset.t;S.bcin=el.dataset.c||"Le Grand Rex";S.bloc=el.dataset.l||"1 boulevard Poissonnière, Paris 2e"},
+step:()=>S.step=+v,back:()=>{S.step>1&&S.step<5?S.step--:(S.book=false)},di:()=>S.di=+v,time:()=>S.time=v,
+seat:()=>{S.seats=S.seats.includes(v)?S.seats.filter(s=>s!=v):S.seats.length<6?[...S.seats,v]:S.seats},
+tr:()=>{const[i,d]=v.split(":");S.tr[i]=Math.max(0,Math.min(6,(S.tr[i]||0)+ +d))},
+pay:()=>{const d=D[S.di];S.tickets.push({id:Date.now(),m:S.mv.id,date:`${d.day} ${d.long}`,time:S.time,seats:[...S.seats],cin:S.bcin+" · Salle Infinite",loc:S.bloc,ex:TR.filter(t=>S.tr[t[0]]).map(t=>`${S.tr[t[0]]}× ${t[1]}`)});S.nt.unshift({id:Date.now(),k:"t",t:"Réservation confirmée : <b>"+S.mv.t+"</b> · "+S.seats.join(", "),w:"à l’instant",a:"nav",v:"Mes billets",read:0});S.step=5},
+done:()=>{S.book=false;S.mv=null;S.nav="Mes billets"},
+like:()=>{const k=S.liked.includes(+v);S.liked=k?S.liked.filter(x=>x!=v):[...S.liked,+v];toast("Ajouté à vos coups de cœur")},
+save:()=>{const k=S.saved.includes(+v);S.saved=k?S.saved.filter(x=>x!=v):[...S.saved,+v];toast("Film ajouté à vos favoris")},
+toast:()=>toast(v),fol:()=>S.fol[v]=!S.fol[v],ins:()=>S.ins=v||null,ptab:()=>{S.ptab=v;S.ins=null},ecat:()=>S.ecat=v,
+pp:()=>{if(v==S.me.h){S.nav="Profil";S.pp=null}else S.pp=v;S.mv=null;S.cm=null;S.book=false;S.search=false;S.sf=false;S.q="";S.ptab="Publications";scrollTo(0,0)},ppback:()=>S.pp=null,chat:()=>S.chat=v||null,
+dm:()=>{CV[v]=CV[v]||[];S.nav="Messages";S.chat=v;S.pp=null;scrollTo(0,0)},
+msend:()=>{const t=($("#mi").value||"").trim(),k=S.chat;if(!t||!k)return;CV[k].push({me:1,t:esc(t),w:hm()});setTimeout(()=>{CV[k].push({me:0,t:REP[CV[k].length%REP.length],w:hm()});const seen=S.nav=="Messages"&&S.chat==k&&!S.pp;S.nt.unshift({id:Date.now(),k:"m",t:"<b>"+esc(PE[k].n)+"</b> vous a répondu",w:"à l’instant",a:"dm",v:k,read:seen?1:0});updBell();if(seen){const x=$("#mi")?$("#mi").value:"";render();if(x&&$("#mi"))$("#mi").value=x}},1300)},
+edit:()=>{S.dr={...S.me};S.edit=true},eclose:()=>S.edit=false,
+esave:()=>{const d=S.dr,n=d.n.trim(),nw=S.edit=="new";let h=d.h.trim().toLowerCase().replace(/^@/,"").replace(/[^a-z0-9._]/g,"");if(!h&&nw)h=slug(n);if(!n){toast("Le nom ne peut pas être vide");return}if(!h){toast("Identifiant invalide");return}const used=!!PE[h]||S.profs.some((p,i)=>p&&i!=S.cur&&p.me.h==h)||(nw&&S.me.h==h);if(used&&(nw||h!=S.me.h)){toast("Cet identifiant est déjà pris");return}const me={...d,n,h,city:d.city.trim(),tag:d.tag.trim(),bio:d.bio.trim()};if(nw){if(!S.out)sync();S.profs.push({me,tickets:[],liked:[],saved:[],nt:[],cv:{},fol:{},st:{n1:1,n2:1,n3:1,priv:0,fav:0},hid:[]});load(S.profs.length-1);S.out=false;S.edit=false;toast("Profil créé · bienvenue "+n)}else{S.me=me;S.edit=false;toast("Profil mis à jour")}},
+av:()=>{S.dr.av=+v;S.dr.photo=null},cpost:()=>S.dr.cover={p:+v},crm:()=>S.dr.cover=null,rmphoto:()=>S.dr.photo=null,
+set:()=>S.set=true,sclose2:()=>S.set=false,tg:()=>{if(v=="snd")S.snd=!S.snd;else S.st[v]=S.st[v]?0:1},fav:()=>S.st.fav=+v,
+reset:()=>{S.me={...ME0};S.set=false;toast("Profil réinitialisé")},
+gopen:()=>S.gm=S.gm==v?null:v,
+ctry:()=>{S.country=v;S.city=Object.keys(GEO[v])[0];S.gm=null;toast("Cinémas : "+S.city+", "+v)},
+cty:()=>{S.city=v;S.gm=null;toast("Cinémas de "+v)},
+swp:()=>{sync();load(+v);S.out=false;toast("Connecté en tant que "+S.me.n)},
+newp:()=>{S.gm=null;S.dr={n:"",h:"",city:"",tag:"",bio:"",photo:null,av:-1,cover:null};S.edit="new"},
+logout:()=>{sync();S.out=true;S.gm=null;S.mv=null;S.cm=null;S.book=false;S.pp=null},
+login:()=>{load(+v);S.out=false;toast("Bon retour, "+S.me.n)},
+ntall:()=>S.nt.forEach(n=>n.read=1),
+ntgo:()=>{const n=S.nt.find(x=>x.id==v);if(!n)return;n.read=1;S.gm=null;const a=n.a,w=n.v;if(a=="mv")S.mv=M[w-1];else if(a=="cm")S.cm=+w;else if(a=="dm"){CV[w]=CV[w]||[];S.nav="Messages";S.chat=w;S.pp=null}else if(a=="nav"){S.nav=w;S.pp=null}else if(a=="pp"){S.pp=w;scrollTo(0,0)}},
+more:()=>{const[id,t]=v.split(":");S.pref[id]=t;S.gm=null;toast(t=="more"?"D’accord, nous vous proposerons plus de contenus comme celui-ci":"D’accord, nous vous en proposerons moins")},
+hide:()=>{if(!S.hid.includes(+v))S.hid.push(+v);S.gm=null;S.rep=null;toast("Post masqué · vous pouvez le rétablir depuis le fil")},
+unhide:()=>S.hid=[],
+rep:()=>{S.rep={id:+v,r:null,sent:false};S.gm=null},rpclose:()=>S.rep=null,rpsel:()=>S.rep.r=v,
+rpsend:()=>{if(!S.rep.r){toast("Choisissez d’abord un motif");return}S.rep.sent=true},
+age:()=>S.age=+v,aclose:()=>S.age=null,
+shareP:()=>{const m=M[v-1];S.gm=null;S.share={t:"Partager le post",n:m.t,s:"Publié par "+m.st,u:"https://cinegram.app/post/"+slug(m.t),d:"ce post",av:`<i class="av big52" style="${bg(m)};border-radius:12px"></i>`}},
+shp:()=>{S.share={t:"Partager mon profil",n:S.me.n,s:"@"+S.me.h,u:"https://cinegram.app/@"+S.me.h,d:"ce profil",av:meI("width:52px;height:52px")}},
+shpo:()=>{const p=PE[v];S.share={t:"Partager ce profil",n:p.n,s:p.h,u:"https://cinegram.app/@"+p.k,d:"ce profil",av:`<i class="av big52" ${pa(p)}>${esc(ini(p.n))}</i>`}},
+shclose:()=>S.share=null,copy:()=>doCopy(S.share.u),
+reel:()=>{const[k,i]=v.split("|");S.rl={k,i:+i,st:Date.now(),el:0};S.rpause=false},rclose:()=>{S.rl=null;S.rpause=false},
+rprev:()=>rgo(-1),rnext:()=>rgo(1),
+rpause:()=>{if(S.rpause){S.rl.st=Date.now()-S.rl.el*1000;S.rpause=false}else{S.rl.el=(Date.now()-S.rl.st)/1000;S.rpause=true}},
+rlike:()=>{S.rlk[v]=!S.rlk[v]},rmute:()=>S.rmute=!S.rmute,
+tier:()=>{const[a,b]=v.split(":");S.tier[a]=b},
+snd:()=>S.snd=!S.snd,cm:()=>S.cm=+v,cmclose:()=>S.cm=null,
+cmlike:()=>{const[id,i]=v.split(":"),c=COM[id][i];c.l=!c.l;c.n+=c.l?1:-1},
+cmsend:()=>{const t=($("#cmi").value||"").trim();if(!t)return;COM[S.cm].unshift({u:S.me.h,t:esc(t),w:"à l’instant",n:0});toast("Commentaire publié")},search:()=>S.search=true,sclose:()=>S.search=false,sopen:()=>{S.search=false;S.sf=false;S.q="";S.mv=M[v-1]},scin:()=>{S.country=v.split("|")[0];S.city=v.split("|")[1];S.nav="Cinémas";S.pp=null;S.mv=null;S.sf=false;S.q="";scrollTo(0,0)}}[a];
+if(f){f();render()}});
+document.addEventListener("focusin",e=>{if(e.target.id=="tq"){S.sf=true;if(S.gm){S.gm=null;document.querySelectorAll(".gmenu").forEach(x=>x.remove())}$("#tres").innerHTML=resHTML(e.target.value)}});
+document.addEventListener("input",e=>{if(e.target.id=="tq"){S.q=e.target.value;S.sf=true;$("#tres").innerHTML=resHTML(S.q)}if(e.target.id=="q")sres(e.target.value);const k=e.target.dataset&&e.target.dataset.f;if(k&&S.dr){S.dr[k]=e.target.value;if(k=="bio"&&$("#cnt"))$("#cnt").textContent=e.target.value.length+"/160"}});
+document.addEventListener("change",e=>{const id=e.target.id,cv=id=="cf";if(id!="pf"&&!cv)return;const f=e.target.files[0];if(!f)return;if(!f.type.startsWith("image/")){toast("Choisissez une image");return}const r=new FileReader();r.onload=()=>{const im=new Image();im.onload=()=>{const z=Math.min(1,(cv?1200:480)/Math.max(im.width,im.height)),c=document.createElement("canvas");c.width=Math.round(im.width*z);c.height=Math.round(im.height*z);c.getContext("2d").drawImage(im,0,0,c.width,c.height);if(cv)S.dr.cover={src:c.toDataURL("image/jpeg",.85)};else{S.dr.photo=c.toDataURL("image/jpeg",.88);S.dr.av=-1}render()};im.onerror=()=>toast("Image illisible");im.src=r.result};r.readAsDataURL(f)});
+document.addEventListener("keydown",e=>{if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()=="k"){e.preventDefault();const q=$("#tq");if(q){q.focus();q.select()}}if(e.key=="Enter"&&e.target.id=="cmi"){$("#cmsend").click()}if(e.key=="Enter"&&e.target.id=="mi"){$("#msend").click()}if(S.rl&&e.key=="ArrowRight"){rgo(1);render()}if(S.rl&&e.key=="ArrowLeft"){rgo(-1);render()}if(e.key=="Enter"&&e.target.id=="tq"){const b=document.querySelector("#tres button");if(b)b.click()}if(e.key=="Escape"&&e.target.id=="tq"){e.target.blur();S.sf=false;$("#tres").innerHTML=""}if(e.key=="Escape"&&(S.search||S.mv||S.cm||S.edit||S.set||S.age||S.rep||S.share||S.rl)){S.search=false;S.mv=null;S.book=false;S.cm=null;S.edit=false;S.set=false;S.age=null;S.rep=null;S.share=null;S.rl=null;S.rpause=false;render()}});
+document.addEventListener("animationend",e=>{if(S.rl&&e.target.classList&&e.target.classList.contains("rbar")){rgo(1);render()}});
+render();
+</script></body></html>
 
